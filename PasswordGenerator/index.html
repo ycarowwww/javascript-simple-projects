@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Password Generator</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <main>
+            <div class="password">
+                <input type="password" name="ipassword" id="ipassword" placeholder="Password">
+                <img src="images/visible.png" alt="Visible/Hidden Password" id="imgpassword">
+            </div>
+            <div class="password-utilities">
+                <p>
+                    <img src="images/password_unknown.png" alt="Password Validation" id="passwordvalidationimg">
+                    <span id="passwordvalidationspan">Unknown Password</span>
+                </p>
+                <button id="passwordcopybutton">
+                    <img src="images/copy.png" alt="Copy Icon">
+                    <span>Copy</span>
+                </button>
+            </div>
+            <div class="password-generator-attributes">
+                <input type="range" name="pgalength" id="pgalength" min="0" max="50" value="0">
+                <div class="password-generator-attributes-others">
+                    <p>Character Length: <span id="pgalengthspan">0</span></p>
+                    <div class="password-generator-attributes-checkboxes">
+                        <input type="checkbox" name="pgaa-z" id="pgaa-z">
+                        <label for="pgaa-z">a-z</label>
+                        <input type="checkbox" name="pgaa-zu" id="pgaa-zu">
+                        <label for="pgaa-zu">A-Z</label>
+                        <input type="checkbox" name="pga0-9" id="pga0-9">
+                        <label for="pga0-9">0-9</label>
+                        <input type="checkbox" name="pgasyb" id="pgasyb">
+                        <label for="pgasyb">!#%&</label>
+                    </div>
+                </div>
+            </div>
+            <div class="password-generator-button">
+                <button id="generate-button">Generate Password</button>
+            </div>
+        </main>
+    </body>
+</html>
