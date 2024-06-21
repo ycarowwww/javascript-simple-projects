@@ -31,6 +31,55 @@ main {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+.first-player {
+    width: 100%;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px;
+    overflow: hidden;
+    transition: height .35s ease, padding .35s ease;
+}
+
+.first-player.player-choosen {
+    height: 0;
+    padding: 0;
+}
+
+.first-player > div {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transition: border .25s ease, box-shadow .25s ease;
+}
+
+.first-player > div#x-player {
+    background-color: #AB181A;
+}
+
+.first-player > div#o-player {
+    background-color: #167036;
+}
+
+.first-player > div:hover {
+    border: 2px solid #D4CBCB;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.first-player > div > button {
+    all: unset;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    color: #D4CBCB;
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    cursor: pointer;
+}
+
 .punctuation {
     width: 100%;
     padding: 10px;

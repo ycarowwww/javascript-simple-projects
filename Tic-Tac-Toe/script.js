@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    let actualPlayer = Math.random() > 0.5;
+    let actualPlayer = null;
     let gameEnds = false;
     const divSlots = document.querySelectorAll('div[id^="slot"]');
     const slots = document.querySelectorAll('div[id^="slot"] > button');
@@ -53,6 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     restartButton.addEventListener("click", () => {
+        if (actualPlayer == null) {
+            return;
+        }
+        
         for (let i = 0; i < slots.length; i++) {
             slotsPlayers[i].style.scale = "";
             slotsPlayers[i].src = "";
@@ -119,8 +123,20 @@ document.addEventListener("DOMContentLoaded", () => {
         return false;
     }
 
-    // Start the Website with some Functions:
-    notifyPlayer(slotsPlayers[0]); // Pass a random Slot (This will not affect the game).
-    slotsPlayers[0].src = "";
-    actualPlayer = !actualPlayer;
+    const playerChoosen = document.querySelectorAll('.first-player > div > button');
+    for (let i = 0; i < playerChoosen.length; i++) {
+        playerChoosen[i].addEventListener("click", () => { startGame(playerChoosen[i].innerHTML) });
+    }
+
+    function startGame(player) {
+        actualPlayer = player == "X";
+        actualPlayer = !actualPlayer;
+        notifyPlayer(slotsPlayers[0]);
+        slotsPlayers[0].src = "";
+        actualPlayer = !actualPlayer;
+        for (let i = 0; i < slots.length; i++) {
+            slots[i].removeAttribute("disabled");
+        }
+        document.getElementsByClassName("first-player")[0].classList.toggle("player-choosen");
+    }
 });
