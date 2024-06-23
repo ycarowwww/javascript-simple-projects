@@ -17,11 +17,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const minButton = document.getElementById("minbutton");
     const pluButton = document.getElementById("plubutton");
     const equButton = document.getElementById("equbutton");
+    let previousOperation = document.getElementById("previous-operation"); 
     let lastSignal = null;
     let lastNumberForOperation = NaN;
+    let result = false;
+    let signals = new Map();
+    signals.set("plu", "+");
+    signals.set("min", "-");
+    signals.set("mul", "&#x00D7;");
+    signals.set("div", "&#x00F7;");
 
     for (let i = 0; i < numbersButtons.length; i++) {
         numbersButtons[i].addEventListener("click", () => {
+            if (result) {
+                numberInput.value = "";
+                result = false;
+            }
             numberInput.value += numbersButtons[i].innerHTML;
         });
     }
@@ -33,23 +44,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     pomButton.addEventListener("click", () => {
+        previousOperation.innerHTML = `${numberInput.value} ${signals.get("mul")} -1 =`;
         numberInput.value = parseFloat(numberInput.value) * -1;
     });
 
     invButton.addEventListener("click", () => {
+        previousOperation.innerHTML = `1 ${signals.get("div")} ${numberInput.value} =`;
         numberInput.value = 1 / parseFloat(numberInput.value);
+        signal = null;
     });
 
     xsqButton.addEventListener("click", () => {
+        previousOperation.innerHTML = `${numberInput.value}² =`;
         numberInput.value = parseFloat(numberInput.value) ** 2;
+        signal = null;
     });
 
     sqrtButton.addEventListener("click", () => {
+        previousOperation.innerHTML = `√${numberInput.value} =`;
         numberInput.value = Math.sqrt(parseFloat(numberInput.value));
+        signal = null;
     });
 
     percButton.addEventListener("click", () => {
+        previousOperation.innerHTML = `${numberInput.value} ${signals.get("div")} 100 =`;
         numberInput.value = parseFloat(numberInput.value) / 100;
+        signal = null;
     });
 
     ceButton.addEventListener("click", () => {
@@ -62,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lastNumberForOperation = NaN;
         signal = null;
         lastSignal = null;
+        previousOperation.innerHTML = "";
     });
 
     clButton.addEventListener("click", () => {
@@ -73,14 +94,17 @@ document.addEventListener("DOMContentLoaded", () => {
     mulButton.addEventListener("click", () => { operationFunctions("mul"); });
     divButton.addEventListener("click", () => { operationFunctions("div"); });
     equButton.addEventListener("click", () => {
+        result = true;
         if (!isNaN(numberForOperation)) {
             lastNumberForOperation = parseFloat(numberInput.value);
+            previousOperation.innerHTML = `${numberForOperation} ${signals.get(signal)} ${numberInput.value} =`;
             calculate();
             signal = null;
             numberForOperation = NaN;
         } else if (lastSignal && !isNaN(lastNumberForOperation)) {
             signal = lastSignal;
             numberForOperation = lastNumberForOperation;
+            previousOperation.innerHTML = `${numberForOperation} ${signals.get(signal)} ${numberInput.value} =`;
             calculate();
             signal = null;
             numberForOperation = NaN;
@@ -88,6 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function operationFunctions(operationSignal) {
+        result = true;
         if (!numberInput.value) {
             alert("Enter some Number to Calculate!");
             return;
@@ -95,10 +120,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (isNaN(numberForOperation)) {
             numberForOperation = parseFloat(numberInput.value);
+            previousOperation.innerHTML = `${numberForOperation}`;
         } else {
             if (!signal) {
                 signal = operationSignal;
             }
+            previousOperation.innerHTML = `${numberForOperation} ${signals.get(signal)} ${numberInput.value} =`;
             calculate();
         }
         signal = operationSignal;

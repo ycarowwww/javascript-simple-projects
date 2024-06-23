@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -7,17 +7,18 @@
         <title>Simple Calculator</title>
         <link rel="stylesheet" href="style.css">
         <script src="script.js"></script>
-        <!-- Google Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     </head>
     <body>
         <main>
+            <div class="previous-operations">
+                <p id="previous-operation"></p>
+            </div>
             <input type="text" name="number" id="number">
             <div class="buttons">
                 <div><button id="percbutton">%</button></div>
                 <div><button id="cebutton">CE</button></div>
                 <div><button id="cbutton">C</button></div>
-                <div><button id="clbutton"><span class="material-symbols-outlined">tab_close</span></button></div>
+                <div><button id="clbutton"><img src="imgs/clear.svg" alt="Clear Button Image"></button></div>
                 <div><button id="invbutton">&#x215F;</button></div>
                 <div><button id="xsqbutton">x²</button></div>
                 <div><button id="sqrtbutton">√x</button></div>

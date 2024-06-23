@@ -40,6 +40,14 @@ main {
     box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
 }
 
+.previous-operations p {
+    color: #FDF5E0;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: end;
+    padding-bottom: 10px;
+}
+
 #number {
     width: 100%;
     padding: 10px;
@@ -77,6 +85,9 @@ main {
 .buttons > div > button {
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #FDF5E0;
     background-color: #292F30;
     font-size: 2rem;
@@ -106,6 +117,10 @@ main {
 
 .buttons > div > button.button-equals:hover {
     background-color: #3DB3F0;
+}
+
+.buttons > div > button > img {
+    height: 2rem;
 }
 
 #number, .buttons > div > button {
