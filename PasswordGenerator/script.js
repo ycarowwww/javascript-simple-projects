@@ -1,57 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
     let buttonVisibleHiddenPassword = document.getElementById("imgpassword");
     let inputPassword = document.getElementById("ipassword");
-    let buttonVHPState = true;
 
     // Password Validation
     let passwordValidatorImage = document.getElementById("passwordvalidationimg");
     let passwordValidatorText = document.getElementById("passwordvalidationspan");
-    let passwordCopyButton = document.getElementById("passwordcopybutton");
+    const passwordCopyButton = document.getElementById("passwordcopybutton");
 
     // Password Generator
     let passwordLength = document.getElementById("pgalength");
     let passwordLengthText = document.getElementById("pgalengthspan");
-    let includeLowercase = document.getElementById("pgaa-z").checked;
-    let includeUppercase = document.getElementById("pgaa-zu").checked;
-    let includeNumbers = document.getElementById("pga0-9").checked;
-    let includeSymbols = document.getElementById("pgasyb").checked;
-    let passwordGenerateButton = document.getElementById("generate-button");
+    let includeLowercase = document.getElementById("pgaa-z");
+    let includeUppercase = document.getElementById("pgaa-zu");
+    let includeNumbers = document.getElementById("pga0-9");
+    let includeSymbols = document.getElementById("pgasyb");
+    const passwordGenerateButton = document.getElementById("generate-button");
 
     buttonVisibleHiddenPassword.addEventListener("click", visibleHiddenPassword);
     inputPassword.addEventListener("input", validatePassword);
     passwordCopyButton.addEventListener("click", copyPassword);
-    passwordLength.addEventListener("input", changePasswordLengthText);
-    document.getElementById("pgaa-z").addEventListener("input", () => { includeLowercase = document.getElementById("pgaa-z").checked; });
-    document.getElementById("pgaa-zu").addEventListener("input", () => { includeUppercase = document.getElementById("pgaa-zu").checked; });
-    document.getElementById("pga0-9").addEventListener("input", () => { includeNumbers = document.getElementById("pga0-9").checked; });
-    document.getElementById("pgasyb").addEventListener("input", () => { includeSymbols = document.getElementById("pgasyb").checked; });
-    passwordGenerateButton.addEventListener("click", () => { generatePassword(parseInt(passwordLength.value), includeLowercase, includeUppercase, includeNumbers, includeSymbols) });
+    passwordLength.addEventListener("input", () => { passwordLengthText.innerHTML = `${passwordLength.value}`; });
+    passwordGenerateButton.addEventListener("click", () => { generatePassword(parseInt(passwordLength.value), includeLowercase.checked, includeUppercase.checked, includeNumbers.checked, includeSymbols.checked) });
 
     function visibleHiddenPassword() {
-        if (buttonVHPState) {
+        if (inputPassword.type === "password") {
             buttonVisibleHiddenPassword.src = "images/hidden.png";
             inputPassword.type = "text";
         } else {
             buttonVisibleHiddenPassword.src = "images/visible.png";
             inputPassword.type = "password";
         }
-        buttonVHPState = !buttonVHPState;
     }
 
     function validatePassword() {
         if (inputPassword.value.length === 0) {
-            passwordValidatorImage.src = "images/password_unknown.png";
-            passwordValidatorText.innerHTML = "Unknown Password";
+            passwordValidationMessage("images/password_unknown.svg", "Unknown Password");
         } else if (inputPassword.value.length <= 6) {
-            passwordValidatorImage.src = "images/password_horrible.png";
-            passwordValidatorText.innerHTML = "Horrible Password";
+            passwordValidationMessage("images/password_weak.svg", "Weak Password");
         } else if (inputPassword.value.length <= 14) {
-            passwordValidatorImage.src = "images/password_moderate.png";
-            passwordValidatorText.innerHTML = "Moderate Password";
+            passwordValidationMessage("images/password_moderate.svg", "Moderate Password");
         } else {
-            passwordValidatorImage.src = "images/password_great.png";
-            passwordValidatorText.innerHTML = "Great Password";
+            passwordValidationMessage("images/password_strong.svg", "Strong Password");
         }
+    }
+
+    function passwordValidationMessage(srcImg, textSpan) {
+        passwordValidatorImage.src = srcImg;
+        passwordValidatorText.innerHTML = textSpan;
     }
 
     function copyPassword() {
@@ -60,44 +55,23 @@ document.addEventListener("DOMContentLoaded", () => {
         navigator.clipboard.writeText(inputPassword.value);
     }
 
-    function changePasswordLengthText() {
-        passwordLengthText.innerHTML = `${passwordLength.value}`;
-    }
-
     function generatePassword(length, includeLowercase, includeUppercase, includeNumbers, includeSymbols) {
-        console.log(length)
-        console.log(length < 1)
-        console.log(includeLowercase)
-        console.log(includeUppercase)
-        console.log(includeNumbers)
-        console.log(includeSymbols)
-        console.log(!(includeLowercase || includeUppercase || includeNumbers || includeSymbols) || length < 1)
         if (!(includeLowercase || includeUppercase || includeNumbers || includeSymbols) || length < 1) {
             alert("Enter Valid Parameters.");
             return;
         }
         
-        let allowedCharaters = "";
-        if (includeLowercase) {
-            allowedCharaters += "abcdefghijklmnopqrstuvwxyz";
-        }
-        if (includeUppercase) {
-            allowedCharaters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        }
-        if (includeNumbers) {
-            allowedCharaters += "0123456789";
-        }
-        if (includeSymbols) {
-            allowedCharaters += "!@#$%&*()-_=+[]{}~^;:.>,<`/|"
-        }
+        let allowedChars = "";
+        allowedChars += includeLowercase ? "abcdefghijklmnopqrstuvwxyz" : "";
+        allowedChars += includeUppercase ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : "";
+        allowedChars += includeNumbers ? "0123456789" : "";
+        allowedChars += includeSymbols ? "!@#$%&*()-_=+[]{}~^;:.>,<`/|" : "";
         
-        let password = "";
+        inputPassword.value = "";
         for (let i = 0; i < length; i++) {
-            let letter = allowedCharaters[Math.floor(Math.random() * allowedCharaters.length)];
-            password += letter;
+            inputPassword.value += allowedChars[Math.floor(Math.random() * allowedChars.length)];
         }
 
-        inputPassword.value = password;
         validatePassword();
     }
 });

@@ -43,6 +43,11 @@ main {
     border-radius: 5px;
     outline: none;
     font-size: .8rem;
+    transition: background-color 250ms ease;
+}
+
+#ipassword:focus {
+    background-color: #e4f0ff;
 }
 
 .password > img {
