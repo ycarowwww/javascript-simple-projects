@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BMI</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <main>
+            <h1>BMI</h1>
+
+            <fieldset>
+                <legend>Enter the Datas:</legend>
+
+                <div>
+                    <label for="heightinput">Height:</label>
+                    <input type="number" name="height" id="heightinput" placeholder="Height">
+                </div>
+                <div>
+                    <label for="weightinput">Weight:</label>
+                    <input type="number" name="weight" id="weightinput" placeholder="Weight">
+                </div>
+
+                <button type="button" id="calculatebmi">Calculate BMI</button>
+            </fieldset>
+
+            <table>
+                <caption>BMI Table</caption>
+                <thead>
+                    <tr>
+                        <th>BMI</th>
+                        <th>Classification</th>
+                        <th>Obesity (degree)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Less than 18.5</td>
+                        <td>Underweight</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Between 18.5 and 24.9</td>
+                        <td>Normal</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Between 25.0 and 29.9</td>
+                        <td>Overweight</td>
+                        <td>I</td>
+                    </tr>
+                    <tr>
+                        <td>Between 30.0 and 39.9</td>
+                        <td>Obese</td>
+                        <td>II</td>
+                    </tr>
+                    <tr>
+                        <td>Greater than 40.0</td>
+                        <td>Morbidly Obese</td>
+                        <td>III</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p id="yourbmi">Your BMI: </p>
+        </main>
+    </body>
+</html>
