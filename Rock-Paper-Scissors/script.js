@@ -3,11 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const playerPaper = document.getElementById("paper");
     const playerScissors = document.getElementById("scissors");
 
-    const aiRock = document.getElementById("rock-ai");
-    const aiPaper = document.getElementById("paper-ai");
-    const aiScissors = document.getElementById("scissors-ai");
-
-    const result = document.getElementById("result");
+    let playerChoice = document.querySelector(".playerchoice button");
+    let aiChoice = document.querySelector(".aichoice button");
 
     let playerCount = document.getElementById("playercount");
     let drawCount = document.getElementById("drawcount");
@@ -16,6 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let playerMove = null;
     let aiMove = null;
     const moves = ["rock", "paper", "scissors"];
+    let movesImages = new Map();
+    movesImages.set("rock", "&#x1F48E;");
+    movesImages.set("paper", "&#x1F4DC;");
+    movesImages.set("scissors", "&#x2702;");
 
     playerRock.addEventListener("click", () => { playerMoves(playerRock) });
     playerPaper.addEventListener("click", () => { playerMoves(playerPaper) });
@@ -23,57 +24,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function playerMoves(playerButton) {
         restartGame();
-        playerMove = playerButton.innerHTML.toLowerCase();
-        console.log(playerMove);
-        playerButton.style.backgroundColor = "green";
+        playerMove = playerButton.id;
+        playerChoice.innerHTML = playerButton.innerHTML;
         aiMoves();
     }
 
     function aiMoves() {
         aiMove = moves[Math.floor(Math.random() * 3)];
-        console.log(aiMove);
-        if (aiMove == "rock") {
-            aiRock.style.backgroundColor = "red";
-        } else if (aiMove == "paper") {
-            aiPaper.style.backgroundColor = "red";
-        } else {
-            aiScissors.style.backgroundColor = "red";
-        }
+        aiChoice.innerHTML = movesImages.get(aiMove);
         calculateWinner();
     }
 
     function calculateWinner() {
         if (playerMove == "rock") {
             if (aiMove == "paper") {
-                result.innerHTML = "Result: Lost";
                 aiCount.innerHTML++;
             } else if (aiMove == "scissors") {
-                result.innerHTML = "Result: Wins";
                 playerCount.innerHTML++;
             } else {
-                result.innerHTML = "Result: Draw";
                 drawCount.innerHTML++;
             }
         } else if (playerMove == "paper") {
             if (aiMove == "scissors") {
-                result.innerHTML = "Result: Lost";
                 aiCount.innerHTML++;
             } else if (aiMove == "rock") {
-                result.innerHTML = "Result: Wins";
                 playerCount.innerHTML++;
             } else {
-                result.innerHTML = "Result: Draw";
                 drawCount.innerHTML++;
             }
         } else {
             if (aiMove == "rock") {
-                result.innerHTML = "Result: Lost";
                 aiCount.innerHTML++;
             } else if (aiMove == "paper") {
-                result.innerHTML = "Result: Wins";
                 playerCount.innerHTML++;
             } else {
-                result.innerHTML = "Result: Draw";
                 drawCount.innerHTML++;
             }
         }
@@ -82,12 +66,5 @@ document.addEventListener("DOMContentLoaded", () => {
     function restartGame() {
         playerMove = null;
         aiMove = null;
-        playerRock.style.backgroundColor = "lightgray";
-        playerPaper.style.backgroundColor = "lightgray";
-        playerScissors.style.backgroundColor = "lightgray";
-        aiRock.style.backgroundColor = "lightgray";
-        aiPaper.style.backgroundColor = "lightgray";
-        aiScissors.style.backgroundColor = "lightgray";
-        result.innerHTML = "Result: ";
     }
 });
