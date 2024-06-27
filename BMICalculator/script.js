@@ -1,31 +1,50 @@
 document.addEventListener("DOMContentLoaded", () => {
+    let heightInput = document.getElementById("heightinput");
+    let weightInput = document.getElementById("weightinput");
     let calculateButton = document.getElementById("calculatebmi");
+    const calculateAgain = document.getElementById("calculateagain");
+    let bmiDiv = document.getElementById("bmiindex");
+    let bmiNumber = document.getElementById("bminumber");
+    let bmiClassification = document.getElementById("bmiclassification");
 
-    calculateButton.onclick = function() { calculateBMI() };
+    calculateButton.addEventListener("click", () => {
+        if (heightInput.value === "" || weightInput.value === "" || heightInput.value < 0 || weightInput.value < 0) return;
 
-    function calculateBMI() {
-        let weight = parseFloat(document.getElementById("weightinput").value);
-        let height = parseFloat(document.getElementById("heightinput").value);
+        bmiDiv.classList.toggle("showup");
+        calculateButton.toggleAttribute("disabled");
 
-        let bmi = weight / (height ** 2);
+        calculateBMI(parseFloat(heightInput.value), parseFloat(weightInput.value), bmiNumber, bmiClassification, bmiDiv);
+    });
 
-        let bmiText = document.getElementById("yourbmi");
-        bmiText.innerHTML = `Your BMI: ${bmi}`;
-
-        document.querySelectorAll("main table tbody tr").forEach(element => {
-            element.style.backgroundColor = "transparent";
-        });
+    calculateAgain.addEventListener("click", () => {
+        bmiDiv.classList.toggle("showup");
+        calculateButton.toggleAttribute("disabled");
+    });
+    
+    function calculateBMI(height, weight, bmiNumberText, bmiClassificationText, bmiDiv) {
+        const bmi = parseFloat((weight / (height ** 2)).toFixed(1));
+        bmiNumberText.innerHTML = bmi.toString();
         
+        let bmiColor = "";
         if (bmi < 18.5) {
-            document.querySelector("main table tbody tr:nth-child(1)").style.backgroundColor = "red";
+            bmiColor = "#FAD94C";
+            bmiClassificationText.innerHTML = "Underweight";
         } else if (bmi < 24.9) {
-            document.querySelector("main table tbody tr:nth-child(2)").style.backgroundColor = "red";
+            bmiColor = "#2EB043";
+            bmiClassificationText.innerHTML = "Normal";
         } else if (bmi < 29.9) {
-            document.querySelector("main table tbody tr:nth-child(3)").style.backgroundColor = "red";
+            bmiColor = "#FA7F3E";
+            bmiClassificationText.innerHTML = "Overweight";
         } else if (bmi < 39.9) {
-            document.querySelector("main table tbody tr:nth-child(4)").style.backgroundColor = "red";
+            bmiColor = "#E05438";
+            bmiClassificationText.innerHTML = "Obese";
         } else {
-            document.querySelector("main table tbody tr:nth-child(5)").style.backgroundColor = "red";
+            bmiColor = "#FA283E";
+            bmiClassificationText.innerHTML = "Morbidly Obese";
         }
+
+        bmiNumberText.style.color = bmiColor;
+        bmiClassificationText.style.color = bmiColor;
+        bmiDiv.style.borderTopColor = bmiColor;
     }
 });
