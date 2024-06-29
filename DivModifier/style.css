@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    height: 100dvh;
+    background-color: black;
+}
+
+div {
+    width: 200px;
+    aspect-ratio: 1 / 1;
+    background-color: white;
+    box-shadow: 0 0 5px white;
+    transition: .5s ease;
+}
+
+input {
+    color: white;
+    font-size: 5rem;
+    font-weight: bold;
+    padding: 20px 40px;
+    outline: 0;
+    border: 2px solid white;
+    border-radius: 70px;
+    background-color: black;
+    box-shadow: 0 0 15px 5px #FFFFFF80;
+    transition: background-color 250ms, box-shadow 250ms;
+}
+
+input:focus {
+    background-color: #292929;
+    box-shadow: 0 0 15px 10px #FFFFFF80;
+}
