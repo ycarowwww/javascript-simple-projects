@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+:root {
+    --background-black: #0F1923;
+    --background-white: #D4CBCB;
+    --font-white: #FDF5E0;
+    --font-red: #ff0256;
+    --background-green: #00b84c;
+    --background-lightgreen: #14c25d;
+    --font-green: #15c960;
+    --background-gray: #373D3E;
+    --background-lightgray: #565d5e;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
+input, button {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    background-color: var(--background-white);
+}
+
+main {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--background-black);
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.equation input {
+    color: var(--font-white);
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: right;
+    max-width: 350px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--background-gray);
+    transition: background-color 250ms ease;
+}
+
+.equation input:focus {
+    background-color: var(--background-lightgray);
+}
+
+.buttons {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.buttons button {
+    color: var(--font-white);
+    font-size: 3.5rem;
+    font-weight: bold;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--background-gray);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: background-color 250ms ease, font-size 250ms ease;
+}
+
+.buttons button:hover {
+    background-color: var(--background-lightgray);
+    font-size: 4rem;
+}
+
+.buttons button.buttons--clear {
+    color: var(--font-red);
+}
+
+.buttons button.buttons--operations {
+    color: var(--font-green);
+}
+
+.buttons button.buttons--equals {
+    background-color: var(--background-green);
+}
+
+.buttons button.buttons--equals:hover {
+    background-color: var(--background-lightgreen);
+}
