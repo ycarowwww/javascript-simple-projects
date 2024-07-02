@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     buttonParenthesis.addEventListener("click", () => {
         if (["+", "-", "×", "÷", "("].includes(calculatorInput.value.slice(-1))) {
             calculatorInput.value += "(";
-        } else if (calculatorInput.value.includes("(") && (calculatorInput.value.match(/\(/g) || []).length > (calculatorInput.value.match(/\)/g) || []).length) {
+        } else if ((calculatorInput.value.match(/\(/g) || []).length > (calculatorInput.value.match(/\)/g) || []).length) {
             calculatorInput.value += ")";
         } else if (["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "%", ")"].includes(calculatorInput.value.slice(-1))) {
             calculatorInput.value += "×(";
@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (["+", "-", "×", "÷"].includes(calculatorInput.value.slice(-1))) {
             calculatorInput.value = calculatorInput.value.slice(0, -1);
         }
-        calculatorInput.value += "%";
     });
 
     for (let i = 0; i < buttonsOperations.length; i++) {
@@ -42,11 +41,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     buttonPlusOrMinus.addEventListener("click", () => {
-        calculatorInput.value += "×-1";
+        const number = calculatorInput.value.split(/\+|\-|\×|\÷/).at(-1).replaceAll("(", "");
+        const numberStartIndex = calculatorInput.value.length - number.length;
+
+        if ([")", "%"].includes(calculatorInput.value.slice(-1))) {
+            calculatorInput.value += "×(-";
+        } else {
+            if (calculatorInput.value.slice(numberStartIndex - 2, numberStartIndex) === "(-") {
+                calculatorInput.value = calculatorInput.value.slice(0, numberStartIndex - 2) + calculatorInput.value.slice(numberStartIndex);
+            } else {
+                calculatorInput.value = calculatorInput.value.slice(0, numberStartIndex) + "(-" + calculatorInput.value.slice(numberStartIndex);
+            }
+        }
     });
 
     for (let i = 0; i < buttonsNumbers.length; i++) {
         buttonsNumbers[i].addEventListener("click", () => {
+            if ([")", "%"].includes(calculatorInput.value.slice(-1))) {
+                calculatorInput.value += "×";
+            }
+            
             calculatorInput.value += buttonsNumbers[i].innerHTML;
         });
     }
