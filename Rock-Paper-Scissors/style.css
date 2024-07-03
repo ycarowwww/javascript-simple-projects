@@ -58,6 +58,10 @@ header h1 {
     align-items: center;
 }
 
+.scoreboard > div.highlight {
+    box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0.5);
+}
+
 .scoreboard > div > p {
     color: #f3f0ed;
     font-size: 1.5rem;
@@ -119,6 +123,10 @@ main div button {
     font-weight: bold;
 }
 
+main div button img {
+    max-width: 50%;
+}
+
 footer {
     width: min(100dvw, 500px);
     margin-inline: auto;
@@ -135,8 +143,6 @@ footer button {
     text-align: center;
     border-radius: 50%;
     background-color: #2e3445;
-    font-size: 2rem;
-    font-weight: bold;
     color: #f3f0ed;
     box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.5);
     transition: background-color 250ms ease;
@@ -145,4 +151,9 @@ footer button {
 
 footer button:hover {
     background-color: #394158;
+}
+
+footer button img {
+    max-width: 40%;
+    filter: invert(1);
 }
