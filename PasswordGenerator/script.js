@@ -33,20 +33,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function validatePassword() {
-        if (inputPassword.value.length === 0) {
+        let passwordLevel = calculatePasswordLevel();
+        
+        if (passwordLevel <= 0) {
             passwordValidationMessage("images/password_unknown.svg", "Unknown Password");
-        } else if (inputPassword.value.length <= 6) {
+        } else if (passwordLevel <= 2) {
             passwordValidationMessage("images/password_weak.svg", "Weak Password");
-        } else if (inputPassword.value.length <= 14) {
+        } else if (passwordLevel <= 4) {
             passwordValidationMessage("images/password_moderate.svg", "Moderate Password");
         } else {
             passwordValidationMessage("images/password_strong.svg", "Strong Password");
         }
+        return passwordLevel;
     }
 
     function passwordValidationMessage(srcImg, textSpan) {
         passwordValidatorImage.src = srcImg;
         passwordValidatorText.innerHTML = textSpan;
+    }
+
+    function calculatePasswordLevel() {
+        let passwordLevel = 0;
+        passwordLevel += (inputPassword.value.match(/[a-z]/g) || []).length > 0 ? 1 : 0;
+        passwordLevel += (inputPassword.value.match(/[A-Z]/g) || []).length > 0 ? 1 : 0;
+        passwordLevel += (inputPassword.value.match(/[0-9]/g) || []).length > 0 ? 1 : 0;
+        passwordLevel += (inputPassword.value.match(/[!@#$%&*()\-_=+\[\]{}~\^;:.>,<`\/\|]/g) || []).length > 0 ? 1 : 0;
+        passwordLevel += inputPassword.value.length > 7 ? 1 : 0;
+        return passwordLevel;
     }
 
     function copyPassword() {
@@ -66,12 +79,24 @@ document.addEventListener("DOMContentLoaded", () => {
         allowedChars += includeUppercase ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : "";
         allowedChars += includeNumbers ? "0123456789" : "";
         allowedChars += includeSymbols ? "!@#$%&*()-_=+[]{}~^;:.>,<`/|" : "";
+
+        let passwordRequirements = 0;
+        passwordRequirements += includeLowercase ? 1 : 0;
+        passwordRequirements += includeUppercase ? 1 : 0;
+        passwordRequirements += includeNumbers ? 1 : 0;
+        passwordRequirements += includeSymbols ? 1 : 0;
+        passwordRequirements += length > 7 ? 1 : 0;
         
         inputPassword.value = "";
         for (let i = 0; i < length; i++) {
             inputPassword.value += allowedChars[Math.floor(Math.random() * allowedChars.length)];
         }
 
-        validatePassword();
+        while (passwordRequirements != validatePassword()) {
+            inputPassword.value = "";
+            for (let i = 0; i < length; i++) {
+                inputPassword.value += allowedChars[Math.floor(Math.random() * allowedChars.length)];
+            }
+        }
     }
 });
