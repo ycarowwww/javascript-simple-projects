@@ -38,11 +38,10 @@ main {
     grid-template-columns: repeat(2, 1fr);
     gap: 60px;
     overflow: hidden;
-    transition: height .35s ease, padding .35s ease;
+    transition: padding .35s ease;
 }
 
 .first-player.player-choosen {
-    height: 0;
     padding: 0;
 }
 
@@ -51,7 +50,13 @@ main {
     aspect-ratio: 1;
     border-radius: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    transition: border .25s ease, box-shadow .25s ease;
+    justify-self: center;
+    transition: border .25s ease, box-shadow .25s ease, width .5s ease;
+    overflow: hidden;
+}
+
+.first-player.player-choosen > div {
+    width: 0;
 }
 
 .first-player > div#x-player {
