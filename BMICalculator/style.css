@@ -81,6 +81,18 @@ main fieldset input::-webkit-outer-spin-button, main fieldset input::-webkit-inn
     -webkit-appearance: none;
 }
 
+main fieldset div span.material-symbols-outlined {
+    font-size: 2rem;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+main fieldset div {
+    position: relative;
+}
+
 main fieldset div + div {
     margin-top: 5px;
 }
