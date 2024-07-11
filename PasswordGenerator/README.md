@@ -1,3 +1,3 @@
 # Simple Random Password Generator
 
-A Random Password Generator made in HTML, CSS and JavaScript.
+A Random Password Generator made in HTML, CSS and JavaScript. Basically, it can generate passwords with lowercase, uppercase, numbers and some special characters, in addition to being able to define the length of the password. Furthermore, it also has a simple Password Analyzer, which only checks if the password has all possible parameters and if it is more than 8 characters in length.
