@@ -1,48 +1,44 @@
-let heightInput = document.getElementById("heightinput");
-let weightInput = document.getElementById("weightinput");
-let calculateButton = document.getElementById("calculatebmi");
-const calculateAgain = document.getElementById("calculateagain");
-let bmiDiv = document.getElementById("bmiindex");
-let bmiNumber = document.getElementById("bminumber");
-let bmiClassification = document.getElementById("bmiclassification");
+const calculateButton = document.getElementById("calculatebmi");
+const calculateAgainButton = document.getElementById("calculateagain");
+const bmiResult = document.getElementById("bmiindex");
 
-calculateButton.addEventListener("click", () => {
-    if (heightInput.value === "" || weightInput.value === "" || heightInput.value < 0 || weightInput.value < 0) return;
+calculateButton.addEventListener("click", calculateBMI);
+calculateAgainButton.addEventListener("click", showBMIResult);
 
-    bmiDiv.classList.toggle("showup");
-    calculateButton.toggleAttribute("disabled");
-
-    calculateBMI(parseFloat(heightInput.value), parseFloat(weightInput.value), bmiNumber, bmiClassification, bmiDiv);
-});
-
-calculateAgain.addEventListener("click", () => {
-    bmiDiv.classList.toggle("showup");
-    calculateButton.toggleAttribute("disabled");
-});
-
-function calculateBMI(height, weight, bmiNumberText, bmiClassificationText, bmiDiv) {
-    const bmi = parseFloat((weight / (height ** 2)).toFixed(1));
-    bmiNumberText.innerHTML = bmi.toString();
+function calculateBMI() {
+    const height = parseFloat(document.getElementById("heightinput").value);
+    const weight = parseFloat(document.getElementById("weightinput").value);
     
-    let bmiColor = "";
-    if (bmi < 18.5) {
-        bmiColor = "#FAD94C";
-        bmiClassificationText.innerHTML = "Underweight";
-    } else if (bmi < 24.9) {
-        bmiColor = "#2EB043";
-        bmiClassificationText.innerHTML = "Normal";
-    } else if (bmi < 29.9) {
-        bmiColor = "#FA7F3E";
-        bmiClassificationText.innerHTML = "Overweight";
-    } else if (bmi < 39.9) {
-        bmiColor = "#E05438";
-        bmiClassificationText.innerHTML = "Obese";
-    } else {
-        bmiColor = "#FA283E";
-        bmiClassificationText.innerHTML = "Morbidly Obese";
+    if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+        alert("Enter Valid Height or Weight.");
+        return;
     }
 
-    bmiNumberText.style.color = bmiColor;
-    bmiClassificationText.style.color = bmiColor;
-    bmiDiv.style.borderTopColor = bmiColor;
+    const bmi = parseFloat((weight / (height ** 2)).toFixed(2));
+    const bmiNumberText = document.getElementById("bminumber");
+    const bmiClassificationText = document.getElementById("bmiclassification");
+    let bmiClassification = {
+        color : "",
+        classification : "",
+        newValues: function(color, classfication) { this.color = color; this.classification = classfication }
+    }
+    
+    if (bmi < 18.5) bmiClassification.newValues("#FAD94C", "Underweight");
+    else if (bmi < 24.9) bmiClassification.newValues("#2EB043", "Normal");
+    else if (bmi < 29.9) bmiClassification.newValues("#FA7F3E", "Overweight");
+    else if (bmi < 39.9) bmiClassification.newValues("#E05438", "Obese");
+    else bmiClassification.newValues("#FA283E", "Morbidly Obese");
+    
+    bmiNumberText.innerHTML = bmi.toString();
+    bmiClassificationText.innerHTML = bmiClassification.classification;
+    bmiClassificationText.style.color = bmiClassification.color;
+    bmiNumberText.style.color = bmiClassification.color;
+    bmiResult.style.borderTopColor = bmiClassification.color;
+
+    showBMIResult();
+}
+
+function showBMIResult() {
+    bmiResult.classList.toggle("showup");
+    calculateButton.toggleAttribute("disabled");
 }
