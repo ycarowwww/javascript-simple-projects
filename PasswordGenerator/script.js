@@ -1,63 +1,48 @@
 let buttonVisibleHiddenPassword = document.getElementById("imgpassword");
 let inputPassword = document.getElementById("ipassword");
-
-// Password Validation
-let passwordValidatorImage = document.getElementById("passwordvalidationimg");
-let passwordValidatorText = document.getElementById("passwordvalidationspan");
-const passwordCopyButton = document.getElementById("passwordcopybutton");
-
-// Password Generator
 let passwordLength = document.getElementById("pgalength");
 let passwordLengthText = document.getElementById("pgalengthspan");
-let includeLowercase = document.getElementById("pgaa-z");
-let includeUppercase = document.getElementById("pgaa-zu");
-let includeNumbers = document.getElementById("pga0-9");
-let includeSymbols = document.getElementById("pgasyb");
+const passwordCopyButton = document.getElementById("passwordcopybutton");
 const passwordGenerateButton = document.getElementById("generate-button");
 
-buttonVisibleHiddenPassword.addEventListener("click", visibleHiddenPassword);
-inputPassword.addEventListener("input", validatePassword);
+buttonVisibleHiddenPassword.addEventListener("click", toggleVisibleHiddenPassword);
+inputPassword.addEventListener("input", showPasswordValidation);
 passwordCopyButton.addEventListener("click", copyPassword);
-passwordLength.addEventListener("input", () => { passwordLengthText.innerHTML = `${passwordLength.value}`; });
-passwordGenerateButton.addEventListener("click", () => { generatePassword(parseInt(passwordLength.value), includeLowercase.checked, includeUppercase.checked, includeNumbers.checked, includeSymbols.checked) });
+passwordLength.addEventListener("input", () => { passwordLengthText.innerHTML = passwordLength.value.toString(); });
+passwordGenerateButton.addEventListener("click", generatePassword);
 
-function visibleHiddenPassword() {
+function toggleVisibleHiddenPassword() {
     if (inputPassword.type === "password") {
         buttonVisibleHiddenPassword.src = "images/hidden.png";
         inputPassword.type = "text";
-    } else {
-        buttonVisibleHiddenPassword.src = "images/visible.png";
-        inputPassword.type = "password";
+        return;
     }
+    buttonVisibleHiddenPassword.src = "images/visible.png";
+    inputPassword.type = "password";
 }
 
-function validatePassword() {
-    let passwordLevel = calculatePasswordLevel();
+function showPasswordValidation() {
+    let passwordLevel = getPasswordLevel();
+    let passwordClassification = { srcImg : "", textSpan : "" };
+    let passwordValidatorImage = document.getElementById("passwordvalidationimg");
+    let passwordValidatorText = document.getElementById("passwordvalidationspan");
     
-    if (passwordLevel <= 0) {
-        passwordValidationMessage("images/password_unknown.svg", "Unknown Password");
-    } else if (passwordLevel <= 2) {
-        passwordValidationMessage("images/password_weak.svg", "Weak Password");
-    } else if (passwordLevel <= 4) {
-        passwordValidationMessage("images/password_moderate.svg", "Moderate Password");
-    } else {
-        passwordValidationMessage("images/password_strong.svg", "Strong Password");
-    }
-    return passwordLevel;
+    if (passwordLevel <= 0) passwordClassification = { srcImg : "images/password_unknown.svg", textSpan : "Unknown Password" } 
+    else if (passwordLevel <= 2) passwordClassification = { srcImg : "images/password_weak.svg", textSpan : "Weak Password" } 
+    else if (passwordLevel <= 4) passwordClassification = { srcImg : "images/password_moderate.svg", textSpan : "Moderate Password" } 
+    else passwordClassification = { srcImg : "images/password_strong.svg", textSpan : "Strong Password" }
+
+    passwordValidatorImage.src = passwordClassification.srcImg;
+    passwordValidatorText.innerHTML = passwordClassification.textSpan;
 }
 
-function passwordValidationMessage(srcImg, textSpan) {
-    passwordValidatorImage.src = srcImg;
-    passwordValidatorText.innerHTML = textSpan;
-}
-
-function calculatePasswordLevel() {
+function getPasswordLevel() {
     let passwordLevel = 0;
     passwordLevel += (inputPassword.value.match(/[a-z]/g) || []).length > 0 ? 1 : 0;
     passwordLevel += (inputPassword.value.match(/[A-Z]/g) || []).length > 0 ? 1 : 0;
     passwordLevel += (inputPassword.value.match(/[0-9]/g) || []).length > 0 ? 1 : 0;
     passwordLevel += (inputPassword.value.match(/[!@#$%&*()\-_=+\[\]{}~\^;:.>,<`\/\|]/g) || []).length > 0 ? 1 : 0;
-    passwordLevel += inputPassword.value.length > 7 ? 1 : 0;
+    passwordLevel += inputPassword.value.length >= 8 ? 1 : 0;
     return passwordLevel;
 }
 
@@ -67,34 +52,36 @@ function copyPassword() {
     navigator.clipboard.writeText(inputPassword.value);
 }
 
-function generatePassword(length, includeLowercase, includeUppercase, includeNumbers, includeSymbols) {
-    if (!(includeLowercase || includeUppercase || includeNumbers || includeSymbols) || length < 1) {
+function generatePassword() {
+    const includeLowercase = document.getElementById("pgaa-z").checked;
+    const includeUppercase = document.getElementById("pgaa-zu").checked;
+    const includeNumbers = document.getElementById("pga0-9").checked;
+    const includeSymbols = document.getElementById("pgasyb").checked;
+    const length = parseInt(passwordLength.value);
+    
+    if (!(includeLowercase || includeUppercase || includeNumbers || includeSymbols) || length < [includeLowercase, includeUppercase, includeNumbers, includeSymbols].filter((x) => x).length) {
         alert("Enter Valid Parameters.");
         return;
     }
     
-    let allowedChars = "";
-    allowedChars += includeLowercase ? "abcdefghijklmnopqrstuvwxyz" : "";
-    allowedChars += includeUppercase ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : "";
-    allowedChars += includeNumbers ? "0123456789" : "";
-    allowedChars += includeSymbols ? "!@#$%&*()-_=+[]{}~^;:.>,<`/|" : "";
-
-    let passwordRequirements = 0;
-    passwordRequirements += includeLowercase ? 1 : 0;
-    passwordRequirements += includeUppercase ? 1 : 0;
-    passwordRequirements += includeNumbers ? 1 : 0;
-    passwordRequirements += includeSymbols ? 1 : 0;
-    passwordRequirements += length > 7 ? 1 : 0;
+    let requiredPassword = { allowedChars : "", level : 0, addRequirements : function(chars, level) { this.allowedChars += chars; this.level += level; } };
+    if (includeLowercase) requiredPassword.addRequirements("abcdefghijklmnopqrstuvwxyz", 1);
+    if (includeUppercase) requiredPassword.addRequirements("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 1);
+    if (includeNumbers) requiredPassword.addRequirements("0123456789", 1);
+    if (includeSymbols) requiredPassword.addRequirements("!@#$%&*()-_=+[]{}~^;:.>,<`/|", 1);
+    requiredPassword.level += length >= 8 ? 1 : 0;
     
     inputPassword.value = "";
     for (let i = 0; i < length; i++) {
-        inputPassword.value += allowedChars[Math.floor(Math.random() * allowedChars.length)];
+        inputPassword.value += requiredPassword.allowedChars[Math.floor(Math.random() * requiredPassword.allowedChars.length)];
     }
 
-    while (passwordRequirements != validatePassword()) {
+    while (requiredPassword.level != getPasswordLevel()) {
         inputPassword.value = "";
         for (let i = 0; i < length; i++) {
-            inputPassword.value += allowedChars[Math.floor(Math.random() * allowedChars.length)];
+            inputPassword.value += requiredPassword.allowedChars[Math.floor(Math.random() * requiredPassword.allowedChars.length)];
         }
     }
+
+    showPasswordValidation()
 }
