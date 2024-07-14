@@ -1,11 +1,11 @@
-const playerRock = document.getElementById("rock");
-const playerPaper = document.getElementById("paper");
-const playerScissors = document.getElementById("scissors");
+const playerRockButton = document.getElementById("rock");
+const playerPaperButton = document.getElementById("paper");
+const playerScissorsButton = document.getElementById("scissors");
 
 let playerChoice = document.querySelector(".playerchoice button");
 let aiChoice = document.querySelector(".aichoice button");
 
-const divsScoreboard = document.querySelectorAll(".scoreboard > div");
+const scoreboard = document.querySelectorAll(".scoreboard > div");
 let playerCount = document.getElementById("playercount");
 let drawCount = document.getElementById("drawcount");
 let aiCount = document.getElementById("aicount");
@@ -18,9 +18,9 @@ movesImages.set("rock", "images/rock.svg");
 movesImages.set("paper", "images/paper.svg");
 movesImages.set("scissors", "images/scissors.svg");
 
-playerRock.addEventListener("click", () => { playerMoves(playerRock) });
-playerPaper.addEventListener("click", () => { playerMoves(playerPaper) });
-playerScissors.addEventListener("click", () => { playerMoves(playerScissors) });
+playerRockButton.addEventListener("click", () => { playerMoves(playerRockButton) });
+playerPaperButton.addEventListener("click", () => { playerMoves(playerPaperButton) });
+playerScissorsButton.addEventListener("click", () => { playerMoves(playerScissorsButton) });
 
 function playerMoves(playerButton) {
     restartGame();
@@ -37,20 +37,20 @@ function aiMoves() {
 
 function calculateWinner() {
     let count = null;
-    if (playerMove == "rock") {
-        count = aiMove == "paper" ? aiCount : (aiMove == "scissors" ? playerCount : drawCount);
-    } else if (playerMove == "paper") {
-        count = aiMove == "scissors" ? aiCount : (aiMove == "rock" ? playerCount : drawCount);
+    if (playerMove === "rock") {
+        count = aiMove === "paper" ? aiCount : (aiMove === "scissors" ? playerCount : drawCount);
+    } else if (playerMove === "paper") {
+        count = aiMove === "scissors" ? aiCount : (aiMove === "rock" ? playerCount : drawCount);
     } else {
-        count = aiMove == "rock" ? aiCount : (aiMove == "paper" ? playerCount : drawCount);
+        count = aiMove === "rock" ? aiCount : (aiMove === "paper" ? playerCount : drawCount);
     }
     count.innerHTML++;
     highlightCount(document.querySelector(`.scoreboard > div:has(span#${count.id}`));
 }
 
 function highlightCount(count) {
-    for (let i = 0; i < divsScoreboard.length; i++) {
-        divsScoreboard[i].classList.remove("highlight");
+    for (let i = 0; i < scoreboard.length; i++) {
+        scoreboard[i].classList.remove("highlight");
     }
     count.classList.add("highlight");
 }
