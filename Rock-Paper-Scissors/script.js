@@ -45,14 +45,14 @@ function calculateWinner() {
         count = aiMove === "rock" ? aiCount : (aiMove === "paper" ? playerCount : drawCount);
     }
     count.innerHTML++;
-    highlightCount(document.querySelector(`.scoreboard > div:has(span#${count.id}`));
+    winnerCount(document.querySelector(`.scoreboard > div:has(span#${count.id}`));
 }
 
-function highlightCount(count) {
+function winnerCount(count) {
     for (let i = 0; i < scoreboard.length; i++) {
-        scoreboard[i].classList.remove("highlight");
+        scoreboard[i].classList.remove("winner");
     }
-    count.classList.add("highlight");
+    count.classList.add("winner");
 }
 
 function restartGame() {

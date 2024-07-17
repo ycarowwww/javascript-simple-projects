@@ -17,19 +17,24 @@ body {
     margin: 0;
     padding: 0;
     background-color: #181537;
+    display: grid;
+    grid-template-rows: 1fr 5fr 1fr 0fr;
+    justify-items: center;
+    align-items: center;
+    height: 100dvh;
 }
 
 header {
-    background-color: #0c0a1c;
     width: min(100dvw, 700px);
     padding: 10px 30px;
-    margin-top: 10px;
-    margin-inline: auto;
     border-radius: 10px;
+    background-color: #0c0a1c;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    justify-content: center;
     align-items: center;
+    gap: 10px;
 }
 
 header h1 {
@@ -40,25 +45,25 @@ header h1 {
 }
 
 .scoreboard {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     justify-content: center;
     align-items: center;
     gap: 15px;
 }
 
 .scoreboard > div {
-    width: 100px;
-    aspect-ratio: 1 / 1;
-    border-radius: 10px;
+    width: 100%;
     background-color: #2e3445;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.scoreboard > div.highlight {
+.scoreboard > div.winner {
     box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0.5);
 }
 
@@ -86,16 +91,16 @@ header h1 {
 }
 
 main {
-    display: block;
     width: 100dvw;
-    padding-block: 100px;
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    justify-items: center;
     align-items: center;
+    gap: 10px;
 }
 
 main div {
-    width: 150px;
+    width: max(150px, 25%);
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     background-color: #f3f0ed;
@@ -106,11 +111,11 @@ main div {
 }
 
 main div.playerchoice {
-    border: 20px solid #f6d036;
+    border: 20px solid #2070e1;
 }
 
 main div.aichoice {
-    border: 20px solid #2070e1;
+    border: 20px solid #f98b0d;
 }
 
 main div button {
@@ -127,33 +132,32 @@ main div button img {
     max-width: 50%;
 }
 
-footer {
-    width: min(100dvw, 500px);
+.choice-buttons {
+    width: max(20%, min(95%, 250px));
+    height: 100%;
     margin-inline: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
 
-footer button {
+.choice-buttons button {
     all: unset;
-    width: 75px;
-    aspect-ratio: 1 / 1;
+    color: #f3f0ed;
     text-align: center;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     background-color: #2e3445;
-    color: #f3f0ed;
     box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.5);
     transition: background-color 250ms ease;
     cursor: pointer;
 }
 
-footer button:hover {
+.choice-buttons button:hover {
     background-color: #394158;
 }
 
-footer button img {
+.choice-buttons button img {
     max-width: 40%;
     filter: invert(1);
 }
