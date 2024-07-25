@@ -1,5 +1,20 @@
 @charset "UTF-8";
 
+:root {
+    --background-color-body: #161733;
+    --background-color-main: #17253f;
+    --background-color-game: #324c7c;
+    --background-color-game-slot: #22244F;
+    --background-color-game-slot-hover: #2E306B;
+    --background-color-game-slot-hover-winner: #BCBCBC;
+    --player-x-color: #AB181A;
+    --player-o-color: #167036;
+    --white-1: #D4CBCB;
+    --black-1: #101214;
+    --shadow1: rgba(0, 0, 0, 0.5);
+    --shadow2: rgba(255, 255, 255, 0.5);
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
     font-family: monospace;
@@ -16,7 +31,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100dvh;
-    background-color: #161733;
+    background-color: var(--background-color-body);
 }
 
 p {
@@ -27,8 +42,8 @@ p {
 main {
     padding: 15px;
     border-radius: 10px;
-    background-color: #17253f;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: var(--background-color-main);
+    box-shadow: 0 0 10px var(--shadow1);
 }
 
 .first-player {
@@ -49,7 +64,7 @@ main {
     width: 100%;
     aspect-ratio: 1;
     border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px var(--shadow1);
     justify-self: center;
     transition: border .25s ease, box-shadow .25s ease, width .5s ease;
     overflow: hidden;
@@ -60,16 +75,16 @@ main {
 }
 
 .first-player > div#x-player {
-    background-color: #AB181A;
+    background-color: var(--player-x-color);
 }
 
 .first-player > div#o-player {
-    background-color: #167036;
+    background-color: var(--player-o-color);
 }
 
 .first-player > div:hover {
-    border: 2px solid #D4CBCB;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    border: 2px solid var(--white-1);
+    box-shadow: 0 0 5px var(--shadow2);
 }
 
 .first-player > div > button {
@@ -77,10 +92,10 @@ main {
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    color: #D4CBCB;
+    color: var(--white-1);
     font-size: 3rem;
     font-weight: bold;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 5px var(--shadow1);
     text-align: center;
     cursor: pointer;
 }
@@ -98,8 +113,8 @@ main {
     width: 100%;
     aspect-ratio: 1 / 1;
     border-radius: 10px;
-    color: #101214;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    color: var(--black-1);
+    box-shadow: 0 0 5px var(--shadow1);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -107,21 +122,21 @@ main {
 }
 
 .punctuation > div#winx {
-    background-color: #AB181A;
+    background-color: var(--player-x-color);
 }
 
 .punctuation > div#draw {
-    background-color: #D4CBCB;
+    background-color: var(--white-1);
 }
 
 .punctuation > div#wino {
-    background-color: #167036;
+    background-color: var(--player-o-color);
 }
 
 .punctuation > div > p {
     font-weight: bold;
     text-align: center;
-    text-shadow: 0 0 2px #101214;
+    text-shadow: 0 0 2px var(--black-1);
 }
 
 .punctuation > div > p.punc-div-title {
@@ -137,8 +152,8 @@ main {
     aspect-ratio: 1 / 1;
     padding: 10px;
     border-radius: 10px;
-    background-color: #324c7c;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    background-color: var(--background-color-game);
+    box-shadow: 0 0 5px var(--shadow1);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
@@ -146,24 +161,24 @@ main {
 
 div[id^="slot"] {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1 / 1;
     border-radius: 10px;
-    background-color: #22244F;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    background-color: var(--background-color-game-slot);
+    box-shadow: 0 0 5px var(--shadow1);
     cursor: pointer;
     transition: background-color .25s ease-in-out;
 }
 
 div[id^="slot"]:hover {
-    background-color: #2E306B;
+    background-color: var(--background-color-game-slot-hover);
 }
 
 div[id^="slot"].winnerslot {
-    background-color: #D4CBCB;
+    background-color: var(--white-1);
 }
 
 div[id^="slot"].winnerslot:hover {
-    background-color: #BCBCBC;
+    background-color: var(--background-color-game-slot-hover-winner);
 }
 
 div[id^="slot"] > button {
@@ -183,18 +198,19 @@ div[id^="slot"] > button > img {
     transition: scale .1s ease-out;
 }
 
-#restartbutton {
+.buttons > button {
+    display: block;
     width: 100%;
-    padding-top: 15px;
+    padding-top: 10px;
     border: 0;
     outline: 0;
-    color: #D4CBCB;
+    color: var(--white-1);
     font-size: 1rem;
     text-align: center;
     background-color: transparent;
     cursor: pointer;
 }
 
-#restartbutton:hover {
+.buttons > button:hover {
     text-decoration: underline;
 }

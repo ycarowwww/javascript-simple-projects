@@ -10,17 +10,19 @@ let winnerXCount = document.querySelector("div#winx > p.punc-div-score");
 let winnerOCount = document.querySelector("div#wino > p.punc-div-score");
 let drawCount = document.querySelector("div#draw > p.punc-div-score");
 const restartButton = document.getElementById("restartbutton");
+const resetButton = document.getElementById("resetbutton");
 const playerChoosen = document.querySelectorAll('.first-player > div > button');
 
 for (let i = 0; i < playerChoosen.length; i++) playerChoosen[i].addEventListener("click", () => { startGame(playerChoosen[i].innerHTML) });
 for (let i = 0; i < slots.length; i++) slots[i].addEventListener("click", () => { playerMove(i); });
 restartButton.addEventListener("click", restartGame);
+resetButton.addEventListener("click", resetGame);
 
 function startGame(player) {
     actualPlayer = player === "X";
     highlightSlot(actualPlayer ? slotX : slotO);
     for (let i = 0; i < slots.length; i++) slots[i].removeAttribute("disabled");
-    document.getElementsByClassName("first-player")[0].classList.toggle("player-choosen");
+    document.querySelector(".first-player").classList.toggle("player-choosen");
 }
 
 function playerMove(slot) {
@@ -131,4 +133,17 @@ function checkDraw() {
         return true;
     }
     return false;
+}
+
+function resetGame() {
+    restartGame();
+    unHighlightSlot(slotX);
+    unHighlightSlot(draw);
+    unHighlightSlot(slotO);
+    winnerXCount.innerHTML = 0;
+    drawCount.innerHTML = 0;
+    winnerOCount.innerHTML = 0;
+    for (let i = 0; i < slots.length; i++) slots[i].setAttribute("disabled", "");
+    document.querySelector(".first-player").classList.remove("player-choosen");
+    actualPlayer = null;
 }
