@@ -1,90 +1,44 @@
-let actualPlayer = null;
+let actualPlayer = null; // true -> X | false -> O | null -> any
 let gameEnds = false;
-const divSlots = document.querySelectorAll('div[id^="slot"]');
-const slots = document.querySelectorAll('div[id^="slot"] > button');
-const slotsPlayers = document.querySelectorAll('div[id^="slot"] > button > img');
-const slotX = document.getElementById("winx");
-const slotO = document.getElementById("wino");
-const draw = document.getElementById("draw");
-let winnerXCount = document.querySelector("div#winx > p.punc-div-score");
-let winnerOCount = document.querySelector("div#wino > p.punc-div-score");
-let drawCount = document.querySelector("div#draw > p.punc-div-score");
+const firstPlayer = document.querySelector(".first-player");
+const firstPlayersButtons = document.querySelectorAll(".first-player > button");
+const punctuationSlots = document.querySelectorAll(".punctuation > div");
+const punctuationScore = document.querySelectorAll(".punctuation > div > .punc-div-score");
+const boardSlots = document.querySelectorAll(".board > div > button");
+const boardSlotsImages = document.querySelectorAll(".board > div > button > img");
+let winnerBoardSlots = [];
 const restartButton = document.getElementById("restartbutton");
 const resetButton = document.getElementById("resetbutton");
-const playerChoosen = document.querySelectorAll('.first-player > div > button');
 
-for (let i = 0; i < playerChoosen.length; i++) playerChoosen[i].addEventListener("click", () => { startGame(playerChoosen[i].innerHTML) });
-for (let i = 0; i < slots.length; i++) slots[i].addEventListener("click", () => { playerMove(i); });
+for (let player of firstPlayersButtons) player.addEventListener("click", () => { startGame(player.innerHTML) });
+for (let slot of boardSlots) slot.addEventListener("click", () => { playerMove(Array.from(boardSlots).indexOf(slot)) });
 restartButton.addEventListener("click", restartGame);
 resetButton.addEventListener("click", resetGame);
 
 function startGame(player) {
-    actualPlayer = player === "X";
-    highlightSlot(actualPlayer ? slotX : slotO);
-    for (let i = 0; i < slots.length; i++) slots[i].removeAttribute("disabled");
-    document.querySelector(".first-player").classList.toggle("player-choosen");
+    actualPlayer = player === "X"; // true -> X | false -> O | null -> any
+    firstPlayer.classList.toggle("player-choosen");
+    for (slot of boardSlots) slot.removeAttribute("disabled");
+    highlightPunctuationSlot(actualPlayer ? 0 : 2);
 }
 
-function playerMove(slot) {
-    if (slotsPlayers[slot].style.scale != "" || gameEnds) return;
-    
-    drawPlayer(slotsPlayers[slot]);
-    slotsPlayers[slot].style.scale = ".7";
+function playerMove(boardSlotId) {
+    if (boardSlotsImages[boardSlotId].style.scale != "" || gameEnds) return;
 
+    boardSlotsImages[boardSlotId].src = actualPlayer ? "imgs/x-tictactoe.svg" : "imgs/o-tictactoe.svg";
+    boardSlotsImages[boardSlotId].style.scale = ".7";
+    
     if (checkWin()) {
-        if (actualPlayer) {
-            addWins(winnerXCount, slotX, slotO);
-        } else {
-            addWins(winnerOCount, slotO, slotX);
-        }
-        return;
-    }
-    
-    if (!checkDraw()) {
-        actualPlayer = !actualPlayer;
-    }
-}
-
-function restartGame() {
-    if (actualPlayer == null) return;
-    
-    for (let i = 0; i < slots.length; i++) {
-        slotsPlayers[i].style.scale = "";
-        slotsPlayers[i].src = "";
-        divSlots[i].classList.remove("winnerslot");
-        gameEnds = false;
-        drawPlayer(slotsPlayers[0]); // Pass a random Slot (This will not affect the game).
-        slotsPlayers[0].src = "";
-        actualPlayer = !actualPlayer;
-    }
-}
-
-function highlightSlot(slot) {
-    slot.style.border = "2px solid #D4CBCB";
-    slot.style.boxShadow = "0 0 5px rgba(255, 255, 255, 0.5)";
-}
-
-function unHighlightSlot(slot) {
-    slot.style.border = "0";
-    slot.style.boxShadow = "0 0 5px rgba(0, 0, 0, 0.5)";
-}
-
-function addWins(winnerCount, slotWinner, slotLoser) {
-    winnerCount.innerText++;
-    highlightSlot(slotWinner);
-    unHighlightSlot(slotLoser);
-}
-
-function drawPlayer(slot) {
-    unHighlightSlot(draw);
-    if (actualPlayer) {
-        slot.src = "imgs/x-tictactoe.svg";
-        highlightSlot(slotO);
-        unHighlightSlot(slotX);
+        for (slot of winnerBoardSlots) slot.classList.add("winnerslot");
+        for (slot of boardSlots) slot.setAttribute("disabled", "");
+        punctuationScore[actualPlayer ? 0 : 2].innerHTML++;
+    } else if (checkDraw()) {
+        highlightPunctuationSlot(1);
+        punctuationScore[1].innerHTML++;
+        for (slot of boardSlots) slot.setAttribute("disabled", "");
     } else {
-        slot.src = "imgs/o-tictactoe.svg";
-        highlightSlot(slotX);
-        unHighlightSlot(slotO);
+        actualPlayer = !actualPlayer;
+        highlightPunctuationSlot(actualPlayer ? 0 : 2);
     }
 }
 
@@ -92,24 +46,24 @@ function checkWin() {
     gameEnds = true;
     
     for (let i = 0; i < 3; i++) {
-        if (slotsPlayers[i * 3].src == slotsPlayers[i * 3 + 1].src && slotsPlayers[i * 3 + 1].src == slotsPlayers[i * 3 + 2].src && slotsPlayers[i * 3 + 2].style.scale != "") {
-            slotWinners(divSlots[i * 3], divSlots[i * 3 + 1], divSlots[i * 3 + 2]);
+        if (boardSlotsImages[i * 3].src == boardSlotsImages[i * 3 + 1].src && boardSlotsImages[i * 3 + 1].src == boardSlotsImages[i * 3 + 2].src && boardSlotsImages[i * 3 + 2].style.scale != "") {
+            winnerBoardSlots = [boardSlots[i * 3], boardSlots[i * 3 + 1], boardSlots[i * 3 + 2]];
             return true;
         }
 
-        if (slotsPlayers[i].src == slotsPlayers[i + 3].src && slotsPlayers[i + 3].src == slotsPlayers[i + 6].src && slotsPlayers[i + 6].style.scale != "") {
-            slotWinners(divSlots[i], divSlots[i + 3], divSlots[i + 6]);
+        if (boardSlotsImages[i].src == boardSlotsImages[i + 3].src && boardSlotsImages[i + 3].src == boardSlotsImages[i + 6].src && boardSlotsImages[i + 6].style.scale != "") {
+            winnerBoardSlots = [boardSlots[i], boardSlots[i + 3], boardSlots[i + 6]];
             return true;
         }
     }
 
-    if (slotsPlayers[0].src == slotsPlayers[4].src && slotsPlayers[4].src == slotsPlayers[8].src && slotsPlayers[8].style.scale != "") {
-        slotWinners(divSlots[0], divSlots[4], divSlots[8]);
+    if (boardSlotsImages[0].src == boardSlotsImages[4].src && boardSlotsImages[4].src == boardSlotsImages[8].src && boardSlotsImages[8].style.scale != "") {
+        winnerBoardSlots = [boardSlots[0], boardSlots[4], boardSlots[8]];
         return true;
     }
 
-    if (slotsPlayers[2].src == slotsPlayers[4].src && slotsPlayers[4].src == slotsPlayers[6].src && slotsPlayers[6].style.scale != "") {
-        slotWinners(divSlots[2], divSlots[4], divSlots[6]);
+    if (boardSlotsImages[2].src == boardSlotsImages[4].src && boardSlotsImages[4].src == boardSlotsImages[6].src && boardSlotsImages[6].style.scale != "") {
+        winnerBoardSlots = [boardSlots[2], boardSlots[4], boardSlots[6]];
         return true;
     }
 
@@ -117,33 +71,43 @@ function checkWin() {
     return false;
 }
 
-function slotWinners(...winnerSlots) {
-    for (let i = 0; i < winnerSlots.length; i++) {
-        winnerSlots[i].classList.add("winnerslot");
-    }
+function checkDraw() {
+    return !Array.from(boardSlotsImages).some(img => img.style.scale === "")
 }
 
-function checkDraw() {
-    if (!Array.from(slotsPlayers).some(img => img.style.scale == '')) {
-        drawCount.innerHTML = parseInt(drawCount.innerHTML) + 1;
-        unHighlightSlot(slotX);
-        unHighlightSlot(slotO);
-        highlightSlot(draw);
-        gameEnds = true;
-        return true;
+function restartGame() {
+    if (actualPlayer === null) return;
+
+    for (slot of boardSlotsImages) {
+        slot.style.scale = "";
+        slot.src = "";
     }
-    return false;
+    for (slot of winnerBoardSlots) slot.classList.remove("winnerslot");
+    for (slot of boardSlots) slot.removeAttribute("disabled");
+    winnerBoardSlots = [];
+    actualPlayer = !actualPlayer;
+    highlightPunctuationSlot(actualPlayer ? 0 : 2);
+    gameEnds = false;
 }
 
 function resetGame() {
-    restartGame();
-    unHighlightSlot(slotX);
-    unHighlightSlot(draw);
-    unHighlightSlot(slotO);
-    winnerXCount.innerHTML = 0;
-    drawCount.innerHTML = 0;
-    winnerOCount.innerHTML = 0;
-    for (let i = 0; i < slots.length; i++) slots[i].setAttribute("disabled", "");
-    document.querySelector(".first-player").classList.remove("player-choosen");
+    if (actualPlayer === null) return;
+
     actualPlayer = null;
+    highlightPunctuationSlot(3);
+    for (slot of boardSlotsImages) {
+        slot.style.scale = "";
+        slot.src = "";
+    }
+    for (slot of winnerBoardSlots) slot.classList.remove("winnerslot");
+    for (slot of boardSlots) slot.setAttribute("disabled", "");
+    for (punctuation of punctuationScore) punctuation.innerHTML = 0;
+    firstPlayer.classList.toggle("player-choosen");
+    winnerBoardSlots = [];
+    gameEnds = false;
+}
+
+function highlightPunctuationSlot(slotToHighlight) { // 0 -> X Player | 1 -> Draw | 2 -> O Player | 3 -> None
+    for (slot of punctuationSlots) slot.classList.remove("highlighted");
+    if (slotToHighlight !== 3) punctuationSlots[slotToHighlight].classList.toggle("highlighted");
 }

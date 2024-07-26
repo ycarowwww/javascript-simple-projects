@@ -60,44 +60,40 @@ main {
     padding: 0;
 }
 
-.first-player > div {
+.first-player > button {
+    all: unset;
     width: 100%;
-    aspect-ratio: 1;
+    aspect-ratio: 1 / 1;
     border-radius: 10px;
+    border: 0px solid var(--white-1);
+    color: var(--white-1);
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 0 5px var(--shadow1);
     box-shadow: 0 0 5px var(--shadow1);
-    justify-self: center;
-    transition: border .25s ease, box-shadow .25s ease, width .5s ease;
     overflow: hidden;
+    justify-self: center;
+    box-sizing: border-box;
+    transition: border .25s ease, box-shadow .25s ease, width .5s ease;
+    cursor: pointer;
 }
 
-.first-player.player-choosen > div {
-    width: 0;
-}
-
-.first-player > div#x-player {
-    background-color: var(--player-x-color);
-}
-
-.first-player > div#o-player {
-    background-color: var(--player-o-color);
-}
-
-.first-player > div:hover {
+.first-player > button:hover {
     border: 2px solid var(--white-1);
     box-shadow: 0 0 5px var(--shadow2);
 }
 
-.first-player > div > button {
-    all: unset;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    color: var(--white-1);
-    font-size: 3rem;
-    font-weight: bold;
-    text-shadow: 0 0 5px var(--shadow1);
-    text-align: center;
-    cursor: pointer;
+.first-player > button#x-player-button {
+    background-color: var(--player-x-color);
+}
+
+.first-player > button#o-player-button {
+    background-color: var(--player-o-color);
+}
+
+.first-player.player-choosen > button {
+    width: 0;
 }
 
 .punctuation {
@@ -119,6 +115,11 @@ main {
     flex-direction: column;
     justify-content: center;
     gap: 5px;
+}
+
+.punctuation > div.highlighted {
+    border: 2px solid var(--white-1);
+    box-shadow: 0 0 5px var(--shadow2);
 }
 
 .punctuation > div#winx {
@@ -147,7 +148,7 @@ main {
     font-size: 1.2rem;
 }
 
-.game {
+.board {
     width: 250px;
     aspect-ratio: 1 / 1;
     padding: 10px;
@@ -165,19 +166,19 @@ div[id^="slot"] {
     border-radius: 10px;
     background-color: var(--background-color-game-slot);
     box-shadow: 0 0 5px var(--shadow1);
-    cursor: pointer;
     transition: background-color .25s ease-in-out;
+    cursor: pointer;
 }
 
 div[id^="slot"]:hover {
     background-color: var(--background-color-game-slot-hover);
 }
 
-div[id^="slot"].winnerslot {
+div[id^="slot"]:has(button.winnerslot) {
     background-color: var(--white-1);
 }
 
-div[id^="slot"].winnerslot:hover {
+div[id^="slot"]:has(button.winnerslot):hover {
     background-color: var(--background-color-game-slot-hover-winner);
 }
 
