@@ -116,56 +116,84 @@ main fieldset button:hover {
     background-color: #383485;
 }
 
-#bmiindex {
+#bmidiv {
     width: 100%;
     height: 0;
     overflow: hidden;
     transition: height .5s, margin-top .5s, border-top .5s, border-top-color .5s;
 }
 
-#bmiindex.showup {
+#bmidiv.showup {
     margin-top: 10px;
     border-top: 3px solid #3E3A94;
     border-radius: 2px;
     height: 130px;
 }
 
-#bmiindex > * {
+#bmidiv > * {
     display: block;
     text-align: center;
     margin: 0;
 }
 
-#bmiindex h2 {
+#bmidiv #bminumber {
     font-size: 2rem ;
+    color: inherit;
     padding-block: 10px 5px;
     transition: color .5s;
 }
 
-#bmiindex p {
+#bmidiv #bmiclassificationp {
     font-size: 1.2rem;
     font-weight: bold;
+    text-transform: capitalize;
+    color: inherit;
     margin-bottom: 5px;
     transition: color .5s;
 }
 
-#bmiindex a {
+#bmidiv a {
     color: #fbfcf8;
     font-size: 1.2rem;
     text-decoration: none;
 }
 
-#bmiindex a[href*="wikipedia"] {
+#bmidiv a[href*="wikipedia"] {
     font-size: 1rem;
     display: flex;
     justify-content: right;
     align-items: center;
     gap: 5px;
-    margin-top: 5px;
+    margin-top: 4px;
 }
 
-#bmiindex a:hover, #bmiindex a:hover span:not(.material-symbols-outlined) {
+#bmidiv a:hover, #bmidiv a:hover span:not(.material-symbols-outlined) {
     text-decoration: underline;
+}
+
+#bmidiv.underweight {
+    border-top-color: #FAD94C;
+    color: #FAD94C;
+}
+
+#bmidiv.normal {
+    border-top-color: #2EB043;
+    color: #2EB043;
+}
+
+#bmidiv.overweight {
+    border-top-color: #FA7F3E;
+    color: #FA7F3E;
+}
+
+#bmidiv.obese {
+    border-top-color: #E05438;
+    color: #E05438;
+}
+
+#bmidiv.morbidlyobese {
+    border-top-color: #FA283E;
+    color: #FA283E;
 }
 
 @media screen and (max-width: 980px) {
