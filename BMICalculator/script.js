@@ -3,7 +3,7 @@ const calculateAgainButton = document.getElementById("calculatebmiagain");
 const bmiDiv = document.getElementById("bmidiv");
 
 calculateButton.addEventListener("click", calculateBMI);
-calculateAgainButton.addEventListener("click", showBMIResult);
+calculateAgainButton.addEventListener("click", toggleBMIResultVisibility);
 
 function calculateBMI() {
     const height = parseFloat(document.getElementById("heightinput").value);
@@ -30,10 +30,10 @@ function calculateBMI() {
     bmiClassificationParagraph.innerHTML = bmiClassification;
     bmiDiv.classList.add(bmiClassification.replace(' ', ''));
 
-    showBMIResult();
+    toggleBMIResultVisibility();
 }
 
-function showBMIResult() {
+function toggleBMIResultVisibility() {
     bmiDiv.classList.toggle("showup");
     calculateButton.toggleAttribute("disabled");
 }

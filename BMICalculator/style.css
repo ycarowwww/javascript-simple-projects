@@ -136,7 +136,7 @@ main fieldset button:hover {
     margin: 0;
 }
 
-#bmidiv #bminumber {
+#bmidiv #bmivalue {
     font-size: 2rem ;
     color: inherit;
     padding-block: 10px 5px;
