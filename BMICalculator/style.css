@@ -54,66 +54,67 @@ main h1 {
     text-shadow: 0 0 5px #fbfcf883
 }
 
-main fieldset input {
-    width: 100%;
-    font-size: 1.2rem;
-    padding: 10px;
-    margin-bottom: 5px;
-    outline: none;
-    border-radius: 8px;
-    border: 1px solid #fbfcf8;
-    color: #fbfcf8;
-    background-color: transparent;
-    box-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
-    appearance: textfield;
-    transition: background-color 250ms ease;
-}
+main fieldset {
+    & input {
+        width: 100%;
+        color: #fbfcf8;
+        font-size: 1.2rem;
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 8px;
+        border: 1px solid #fbfcf8;
+        outline: none;
+        background-color: transparent;
+        box-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+        transition: background-color 250ms ease;
 
-main fieldset input:focus {
-    background-color: #28255E;
-}
+        &:focus {
+            background-color: #28255E;
+        }
 
-main fieldset input::placeholder {
-    color: #fbfcf8;
-}
+        &::placeholder {
+            color: #fbfcf8;
+        }
 
-main fieldset input::-webkit-outer-spin-button, main fieldset input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
+        &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+            appearance: none; /* remove arrows/spinners from input type number */
+        }
+    }
 
-main fieldset div span.material-symbols-outlined {
-    font-size: 2rem;
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-}
+    & div {
+        position: relative;
+    }
 
-main fieldset div {
-    position: relative;
-}
+    & div + div {
+        margin-top: 5px;
+    }
+    
+    & div span.material-symbols-outlined {
+        font-size: 2rem;
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+    }
 
-main fieldset div + div {
-    margin-top: 5px;
-}
+    & button {
+        width: 100%;
+        display: block;
+        margin-block: 5px;
+        padding-block: 8px;
+        border-radius: 8px;
+        border: 2px solid #fbfcf8;
+        background-color: #3E3A94;
+        color: #fbfcf8;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 250ms ease;
 
-main fieldset button {
-    width: 100%;
-    display: block;
-    margin-block: 5px;
-    padding-block: 8px;
-    border-radius: 8px;
-    border: 2px solid #fbfcf8;
-    background-color: #3E3A94;
-    color: #fbfcf8;
-    font-size: 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 250ms ease;
-}
-
-main fieldset button:hover {
-    background-color: #383485;
+        &:hover {
+            background-color: #383485;
+        }
+    }
 }
 
 #bmidiv {
@@ -121,79 +122,79 @@ main fieldset button:hover {
     height: 0;
     overflow: hidden;
     transition: height .5s, margin-top .5s, border-top .5s, border-top-color .5s;
-}
 
-#bmidiv.showup {
-    margin-top: 10px;
-    border-top: 3px solid #3E3A94;
-    border-radius: 2px;
-    height: 130px;
-}
+    &.showup {
+        margin-top: 10px;
+        border-top: 3px solid #3E3A94;
+        border-radius: 2px;
+        height: 130px;
+    }
 
-#bmidiv > * {
-    display: block;
-    text-align: center;
-    margin: 0;
-}
+    &.underweight {
+        border-top-color: #FAD94C;
+        color: #FAD94C;
+    }
 
-#bmidiv #bmivalue {
-    font-size: 2rem ;
-    color: inherit;
-    padding-block: 10px 5px;
-    transition: color .5s;
-}
+    &.normal {
+        border-top-color: #2EB043;
+        color: #2EB043;
+    }
 
-#bmidiv #bmiclassificationp {
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-transform: capitalize;
-    color: inherit;
-    margin-bottom: 5px;
-    transition: color .5s;
-}
+    &.overweight {
+        border-top-color: #FA7F3E;
+        color: #FA7F3E;
+    }
 
-#bmidiv a {
-    color: #fbfcf8;
-    font-size: 1.2rem;
-    text-decoration: none;
-}
+    &.obese {
+        border-top-color: #E05438;
+        color: #E05438;
+    }
 
-#bmidiv a[href*="wikipedia"] {
-    font-size: 1rem;
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    gap: 5px;
-    margin-top: 4px;
-}
+    &.morbidlyobese {
+        border-top-color: #FA283E;
+        color: #FA283E;
+    }
 
-#bmidiv a:hover, #bmidiv a:hover span:not(.material-symbols-outlined) {
-    text-decoration: underline;
-}
+    & > * {
+        display: block;
+        text-align: center;
+        margin: 0;
+    }
 
-#bmidiv.underweight {
-    border-top-color: #FAD94C;
-    color: #FAD94C;
-}
+    & #bmivalue {
+        font-size: 2rem ;
+        color: inherit;
+        padding-block: 10px 5px;
+        transition: color .5s;
+    }
+    
+    & #bmiclassificationp {
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-transform: capitalize;
+        color: inherit;
+        margin-bottom: 5px;
+        transition: color .5s;
+    }
 
-#bmidiv.normal {
-    border-top-color: #2EB043;
-    color: #2EB043;
-}
+    & a {
+        color: #fbfcf8;
+        font-size: 1.2rem;
+        text-decoration: none;
+    }
 
-#bmidiv.overweight {
-    border-top-color: #FA7F3E;
-    color: #FA7F3E;
-}
+    & a[href*="wikipedia"] {
+        font-size: 1rem;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        gap: 5px;
+        margin-top: 4px;
+    }
 
-#bmidiv.obese {
-    border-top-color: #E05438;
-    color: #E05438;
-}
-
-#bmidiv.morbidlyobese {
-    border-top-color: #FA283E;
-    color: #FA283E;
+    & a:hover {
+        text-decoration: underline;
+    }
 }
 
 @media screen and (max-width: 980px) {
