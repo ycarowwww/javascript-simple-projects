@@ -1,14 +1,14 @@
-let buttonVisibleHiddenPassword = document.getElementById("imgpassword");
-let inputPassword = document.getElementById("ipassword");
-let passwordLength = document.getElementById("pgalength");
-let passwordLengthText = document.getElementById("pgalengthspan");
+const buttonVisibleHiddenPassword = document.getElementById("imgshowpassword");
+const inputPassword = document.getElementById("ipassword");
+const passwordLength = document.getElementById("passwordlengthinput");
+const passwordLengthCount = document.getElementById("passwordlengthcount");
 const passwordCopyButton = document.getElementById("passwordcopybutton");
 const passwordGenerateButton = document.getElementById("generate-button");
 
 buttonVisibleHiddenPassword.addEventListener("click", toggleVisibleHiddenPassword);
 inputPassword.addEventListener("input", showPasswordValidation);
 passwordCopyButton.addEventListener("click", copyPassword);
-passwordLength.addEventListener("input", () => { passwordLengthText.innerHTML = passwordLength.value.toString(); });
+passwordLength.addEventListener("input", () => { passwordLengthCount.innerHTML = passwordLength.value.toString(); });
 passwordGenerateButton.addEventListener("click", generatePassword);
 
 function toggleVisibleHiddenPassword() {
@@ -53,10 +53,10 @@ function copyPassword() {
 }
 
 function generatePassword() {
-    const includeLowercase = document.getElementById("pgaa-z").checked;
-    const includeUppercase = document.getElementById("pgaa-zu").checked;
-    const includeNumbers = document.getElementById("pga0-9").checked;
-    const includeSymbols = document.getElementById("pgasyb").checked;
+    const includeLowercase = document.getElementById("includelowercase").checked;
+    const includeUppercase = document.getElementById("includeuppercase").checked;
+    const includeNumbers = document.getElementById("includenumbers").checked;
+    const includeSymbols = document.getElementById("includesymbols").checked;
     const length = parseInt(passwordLength.value);
     
     if (!(includeLowercase || includeUppercase || includeNumbers || includeSymbols) || length < [includeLowercase, includeUppercase, includeNumbers, includeSymbols].filter((x) => x).length) {

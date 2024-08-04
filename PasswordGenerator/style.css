@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+:root {
+    --lightblue: #1775E0;
+    --darkblue: #1635E0;
+    --lightbluehover: #e4f0ff;
+    --yellowcopybutton: #ffd700;
+    --yellowcopybuttonhover: #ecca06;
+    --shadow1: rgba(0, 0, 0, 0.5);
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -20,7 +29,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100dvh;
-    background: linear-gradient(to right, #1775E0, #1635E0);
+    background: linear-gradient(to right, var(--lightblue), var(--darkblue));
 }
 
 main {
@@ -28,7 +37,7 @@ main {
     width: min(100dvw, 500px);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 8px var(--shadow1);
 }
 
 .password {
@@ -44,10 +53,10 @@ main {
     outline: none;
     font-size: .8rem;
     transition: background-color 250ms ease;
-}
 
-#ipassword:focus {
-    background-color: #e4f0ff;
+    &:focus {
+        background-color: var(--lightbluehover);
+    }
 }
 
 .password > img {
@@ -58,10 +67,10 @@ main {
     transform: translateY(-50%);
     transition: scale .5s;
     cursor: pointer;
-}
 
-.password > img:hover {
-    scale: 1.1;
+    &:hover {
+        scale: 1.1;
+    }
 }
 
 .password-utilities {
@@ -70,40 +79,40 @@ main {
     align-items: center;
     width: 100%;
     padding-block: 10px;
-}
 
-.password-utilities > :where(p, button) {
-    font-size: .7rem;
-}
+    & > :where(p, button) {
+        font-size: .7rem;
+    }
 
-.password-utilities img {
-    height: .9rem;
-}
+    & img {
+        height: .9rem;
+    }
 
-.password-utilities > p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-}
+    & > p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+    }
 
-.password-utilities > button {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 6px;
-    background-color: #ffd700;
-    border: 0;
-    border-radius: 5px;
-    outline: 0;
-    padding: 5px;
-    transition: background-color .5s, box-shadow .5s;
-    cursor: pointer;
-}
+    & > button {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 6px;
+        background-color: var(--yellowcopybutton);
+        border: 0;
+        border-radius: 5px;
+        outline: 0;
+        padding: 5px;
+        transition: background-color .5s, box-shadow .5s;
+        cursor: pointer;
 
-.password-utilities > button:hover {
-    background-color: #ecca06;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+        &:hover {
+            background-color: var(--yellowcopybuttonhover);
+            box-shadow: 0 0 2px var(--shadow1);
+        }
+    }
 }
 
 .password-generator-attributes > input[type="range"] {
@@ -116,22 +125,24 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+
+    & :where(p, span, label) {
+        font-size: .8rem;
+    }
 }
 
-.password-generator-attributes-others :where(p, span, label) {
-    font-size: 0.8rem;
-}
+.password-generator-attributes-checkboxes {
+    & > input {
+        height: .6rem;
+    }
 
-.password-generator-attributes-checkboxes > label + input {
-    margin-left: 10px;
-}
+    & > label {
+        font-size: .8rem;
+    }
 
-.password-generator-attributes-checkboxes > input {
-    height: .6rem;
-}
-
-.password-generator-attributes-checkboxes > label {
-    font-size: .8rem;
+    & > label + input {
+        margin-left: 10px;
+    }
 }
 
 #generate-button {
@@ -140,8 +151,8 @@ main {
     color: white;
     font-size: 1rem;
     text-align: center;
-    background-color: #1775E0;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    background-color: var(--lightblue);
+    box-shadow: 0 0 5px var(--shadow1);
     border: 0;
     border-radius: 10px;
     outline: 0;
@@ -149,9 +160,9 @@ main {
     padding-block: 10px;
     transition: background-color .5s, box-shadow .5s;
     cursor: pointer;
-}
 
-#generate-button:hover {
-    background-color: #1635E0;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    &:hover {
+        background-color: var(--darkblue);
+        box-shadow: 0 0 10px var(--shadow1);
+    }
 }

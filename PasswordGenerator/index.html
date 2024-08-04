@@ -11,7 +11,7 @@
         <main>
             <div class="password">
                 <input type="password" name="ipassword" id="ipassword" placeholder="Password">
-                <img src="images/visible.png" alt="Visible/Hidden Password" id="imgpassword">
+                <img src="images/visible.png" alt="Visible/Hidden Password" id="imgshowpassword">
             </div>
             <div class="password-utilities">
                 <p>
@@ -24,18 +24,18 @@
                 </button>
             </div>
             <div class="password-generator-attributes">
-                <input type="range" name="pgalength" id="pgalength" min="0" max="50" value="0">
+                <input type="range" name="passwordlengthinput" id="passwordlengthinput" min="0" max="50" value="0">
                 <div class="password-generator-attributes-others">
-                    <p>Character Length: <span id="pgalengthspan">0</span></p>
+                    <p>Character Length: <span id="passwordlengthcount">0</span></p>
                     <div class="password-generator-attributes-checkboxes">
-                        <input type="checkbox" name="pgaa-z" id="pgaa-z">
-                        <label for="pgaa-z">a-z</label>
-                        <input type="checkbox" name="pgaa-zu" id="pgaa-zu">
-                        <label for="pgaa-zu">A-Z</label>
-                        <input type="checkbox" name="pga0-9" id="pga0-9">
-                        <label for="pga0-9">0-9</label>
-                        <input type="checkbox" name="pgasyb" id="pgasyb">
-                        <label for="pgasyb">!#%&</label>
+                        <input type="checkbox" name="includelowercase" id="includelowercase">
+                        <label for="includelowercase">a-z</label>
+                        <input type="checkbox" name="includeuppercase" id="includeuppercase">
+                        <label for="includeuppercase">A-Z</label>
+                        <input type="checkbox" name="includenumbers" id="includenumbers">
+                        <label for="includenumbers">0-9</label>
+                        <input type="checkbox" name="includesymbols" id="includesymbols">
+                        <label for="includesymbols">!#%&</label>
                     </div>
                 </div>
             </div>
