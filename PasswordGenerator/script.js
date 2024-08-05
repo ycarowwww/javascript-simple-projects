@@ -22,7 +22,7 @@ function toggleVisibleHiddenPassword() {
 }
 
 function showPasswordValidation() {
-    let passwordLevel = getPasswordLevel();
+    let passwordLevel = getPasswordLevel(inputPassword.value);
     let passwordClassification = { srcImg : "", textSpan : "" };
     let passwordValidatorImage = document.getElementById("passwordvalidationimg");
     let passwordValidatorText = document.getElementById("passwordvalidationspan");
@@ -36,13 +36,13 @@ function showPasswordValidation() {
     passwordValidatorText.innerHTML = passwordClassification.textSpan;
 }
 
-function getPasswordLevel() {
+function getPasswordLevel(password) {
     let passwordLevel = 0;
-    passwordLevel += (inputPassword.value.match(/[a-z]/g) || []).length > 0 ? 1 : 0;
-    passwordLevel += (inputPassword.value.match(/[A-Z]/g) || []).length > 0 ? 1 : 0;
-    passwordLevel += (inputPassword.value.match(/[0-9]/g) || []).length > 0 ? 1 : 0;
-    passwordLevel += (inputPassword.value.match(/[!@#$%&*()\-_=+\[\]{}~\^;:.>,<`\/\|]/g) || []).length > 0 ? 1 : 0;
-    passwordLevel += inputPassword.value.length >= 8 ? 1 : 0;
+    passwordLevel += (password.match(/[a-z]/g) || []).length > 0 ? 1 : 0;
+    passwordLevel += (password.match(/[A-Z]/g) || []).length > 0 ? 1 : 0;
+    passwordLevel += (password.match(/[0-9]/g) || []).length > 0 ? 1 : 0;
+    passwordLevel += (password.match(/[!@#$%&*()\-_=+\[\]{}~\^;:.>,<`\/\|]/g) || []).length > 0 ? 1 : 0;
+    passwordLevel += password.length >= 8 ? 1 : 0;
     return passwordLevel;
 }
 
@@ -64,22 +64,23 @@ function generatePassword() {
         return;
     }
     
-    let requiredPassword = { allowedChars : "", level : 0, addRequirements : function(chars, level) { this.allowedChars += chars; this.level += level; } };
-    if (includeLowercase) requiredPassword.addRequirements("abcdefghijklmnopqrstuvwxyz", 1);
-    if (includeUppercase) requiredPassword.addRequirements("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 1);
-    if (includeNumbers) requiredPassword.addRequirements("0123456789", 1);
-    if (includeSymbols) requiredPassword.addRequirements("!@#$%&*()-_=+[]{}~^;:.>,<`/|", 1);
-    requiredPassword.level += length >= 8 ? 1 : 0;
+    let requiredPassword = { chars : "", level : 0};
+    if (includeLowercase) requiredPassword.chars += "abcdefghijklmnopqrstuvwxyz";
+    if (includeUppercase) requiredPassword.chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    if (includeNumbers) requiredPassword.chars += "0123456789";
+    if (includeSymbols) requiredPassword.chars += "!@#$%&*()-_=+[]{}~^;:.>,<`/|";
+    requiredPassword.level = getPasswordLevel(requiredPassword.chars);
+    requiredPassword.level -= length < 8 ? 1 : 0;
     
     inputPassword.value = "";
     for (let i = 0; i < length; i++) {
-        inputPassword.value += requiredPassword.allowedChars[Math.floor(Math.random() * requiredPassword.allowedChars.length)];
+        inputPassword.value += requiredPassword.chars[Math.floor(Math.random() * requiredPassword.chars.length)];
     }
 
-    while (requiredPassword.level != getPasswordLevel()) {
+    while (requiredPassword.level != getPasswordLevel(inputPassword.value)) {
         inputPassword.value = "";
         for (let i = 0; i < length; i++) {
-            inputPassword.value += requiredPassword.allowedChars[Math.floor(Math.random() * requiredPassword.allowedChars.length)];
+            inputPassword.value += requiredPassword.chars[Math.floor(Math.random() * requiredPassword.chars.length)];
         }
     }
 
