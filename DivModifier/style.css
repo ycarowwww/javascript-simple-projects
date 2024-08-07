@@ -40,9 +40,9 @@ input {
     background-color: black;
     box-shadow: 0 0 15px 5px #FFFFFF80;
     transition: background-color 250ms, box-shadow 250ms;
-}
 
-input:focus {
-    background-color: #292929;
-    box-shadow: 0 0 15px 10px #FFFFFF80;
+    &:focus {
+        background-color: #292929;
+        box-shadow: 0 0 15px 10px #FFFFFF80;
+    }
 }
