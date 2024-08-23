@@ -15,22 +15,23 @@ function calculateBMI() {
     }
 
     const bmiValue = parseFloat((weight / (height ** 2)).toFixed(2));
-    const bmiValueParagraph = document.getElementById("bmivalue");
-    const bmiClassificationParagraph = document.getElementById("bmiclassificationp");
-    let bmiClassification = "";
+    const bmiValueText = document.getElementById("bmivalue");
+    const bmiClassificationText = document.getElementById("bmiclassification");
+    const bmiClassification = getBMIClassification(bmiValue);
     
-    bmiDiv.className = '';
-    if (bmiValue < 18.5) bmiClassification = "underweight";
-    else if (bmiValue < 24.9) bmiClassification = "normal";
-    else if (bmiValue < 29.9) bmiClassification = "overweight";
-    else if (bmiValue < 39.9) bmiClassification = "obese";
-    else bmiClassification = "morbidly obese";
-    
-    bmiValueParagraph.innerHTML = bmiValue.toString();
-    bmiClassificationParagraph.innerHTML = bmiClassification;
-    bmiDiv.classList.add(bmiClassification.replace(' ', ''));
+    bmiValueText.innerHTML = bmiValue.toString();
+    bmiClassificationText.innerHTML = bmiClassification;
+    bmiDiv.className = bmiClassification.replace(' ', '');
 
     toggleBMIResultVisibility();
+}
+
+function getBMIClassification(bmiValue) {
+    if (bmiValue < 18.5) return "underweight";
+    else if (bmiValue < 24.9) return "normal";
+    else if (bmiValue < 29.9) return "overweight";
+    else if (bmiValue < 39.9) return "obese";
+    else return "morbidly obese";
 }
 
 function toggleBMIResultVisibility() {

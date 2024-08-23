@@ -168,7 +168,7 @@ main fieldset {
         transition: color .5s;
     }
     
-    & #bmiclassificationp {
+    & #bmiclassification {
         font-size: 1.2rem;
         font-weight: bold;
         text-transform: capitalize;
