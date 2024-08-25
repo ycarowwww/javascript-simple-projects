@@ -10,7 +10,7 @@ function calculateBMI() {
     const weight = parseFloat(document.getElementById("weightinput").value);
     
     if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
-        alert("Enter Valid Height or Weight.");
+        alert("Enter a Valid Height or Weight.");
         return;
     }
 

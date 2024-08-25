@@ -8,6 +8,22 @@
     'opsz' 24
 }
 
+:root {
+    --main-white: #fbfcf8;
+    --shadow-black: rgba(0, 0, 0, 0.5);
+    --shadow-white-1: #fbfcf883;
+    --shadow-white-2: #ffffff80;
+    --background-blue: #151433;
+    --background-main-blue: #1D1B45;
+    --blue-1: #3E3A94;
+    --blue-2: #383485;
+    --bmi-tier1: #FAD94C;
+    --bmi-tier2: #2EB043;
+    --bmi-tier3: #FA7F3E;
+    --bmi-tier4: #E05438;
+    --bmi-tier5: #FA283E;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
@@ -28,7 +44,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100dvh;
-    background-color: #151433;
+    background-color: var(--background-blue);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -42,30 +58,30 @@ main {
     width: min(450px, 100%);
     padding: 15px;
     border-radius: 15px;
-    color: #fbfcf8;
-    background-color: #1D1B45;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: var(--main-white);
+    background-color: var(--background-main-blue);
+    box-shadow: 0 0 10px var(--shadow-black);
 }
 
 main h1 {
     text-align: center;
     padding-bottom: 15px;
     font-size: 2.3rem;
-    text-shadow: 0 0 5px #fbfcf883
+    text-shadow: 0 0 5px var(--shadow-white-1);
 }
 
 main fieldset {
     & input {
         width: 100%;
-        color: #fbfcf8;
+        color: var(--main-white);
         font-size: 1.2rem;
         padding: 10px;
         margin-bottom: 5px;
         border-radius: 8px;
-        border: 1px solid #fbfcf8;
+        border: 1px solid var(--main-white);
         outline: none;
         background-color: transparent;
-        box-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 3px var(--shadow-white-2);
         transition: background-color 250ms ease;
 
         &:focus {
@@ -73,7 +89,7 @@ main fieldset {
         }
 
         &::placeholder {
-            color: #fbfcf8;
+            color: var(--main-white);
         }
 
         &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
@@ -94,7 +110,7 @@ main fieldset {
         position: absolute;
         top: 50%;
         right: 10px;
-        transform: translateY(-50%);
+        transform: translateY(-60%);
     }
 
     & button {
@@ -103,16 +119,16 @@ main fieldset {
         margin-block: 5px;
         padding-block: 8px;
         border-radius: 8px;
-        border: 2px solid #fbfcf8;
-        background-color: #3E3A94;
-        color: #fbfcf8;
+        border: 2px solid var(--main-white);
+        background-color: var(--blue-1);
+        color: var(--main-white);
         font-size: 1.5rem;
         font-weight: bold;
         cursor: pointer;
         transition: background-color 250ms ease;
 
         &:hover {
-            background-color: #383485;
+            background-color: var(--blue-2);
         }
     }
 }
@@ -122,37 +138,38 @@ main fieldset {
     height: 0;
     overflow: hidden;
     transition: height .5s, margin-top .5s, border-top .5s, border-top-color .5s;
-
+    
     &.showup {
         margin-top: 10px;
-        border-top: 3px solid #3E3A94;
+        border-top: 3px solid var(--blue-1);
         border-radius: 2px;
-        height: 130px;
+        height: 132px; /* for browsers that do not support "calc-size" */
+        height: calc-size(auto);
     }
 
     &.underweight {
-        border-top-color: #FAD94C;
-        color: #FAD94C;
+        border-top-color: var(--bmi-tier1);
+        color: var(--bmi-tier1);
     }
 
     &.normal {
-        border-top-color: #2EB043;
-        color: #2EB043;
+        border-top-color: var(--bmi-tier2);
+        color: var(--bmi-tier2);
     }
 
     &.overweight {
-        border-top-color: #FA7F3E;
-        color: #FA7F3E;
+        border-top-color: var(--bmi-tier3);
+        color: var(--bmi-tier3);
     }
 
     &.obese {
-        border-top-color: #E05438;
-        color: #E05438;
+        border-top-color: var(--bmi-tier4);
+        color: var(--bmi-tier4);
     }
 
     &.morbidlyobese {
-        border-top-color: #FA283E;
-        color: #FA283E;
+        border-top-color: var(--bmi-tier5);
+        color: var(--bmi-tier5);
     }
 
     & > * {
@@ -162,23 +179,23 @@ main fieldset {
     }
 
     & #bmivalue {
-        font-size: 2rem ;
         color: inherit;
+        font-size: 2rem ;
         padding-block: 10px 5px;
         transition: color .5s;
     }
     
     & #bmiclassification {
+        color: inherit;
         font-size: 1.2rem;
         font-weight: bold;
         text-transform: capitalize;
-        color: inherit;
         margin-bottom: 5px;
         transition: color .5s;
     }
 
     & a {
-        color: #fbfcf8;
+        color: var(--main-white);
         font-size: 1.2rem;
         text-decoration: none;
     }
