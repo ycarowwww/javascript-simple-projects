@@ -1,5 +1,19 @@
 @charset "UTF-8";
 
+:root {
+    --background-blue: #2E73B2;
+    --white-clock: #E1E1E1;
+    --shadow-black: rgba(0, 0, 0, 0.5);
+    --control-green: #07BA07;
+    --control-green-hover: #0D9F0D;
+    --control-yellow: #E6CD10;
+    --control-yellow-hover: #CFB80B;
+    --restart-red: #D40C0C;
+    --restart-red-hover: #B40D0D;
+    --settime-purple: #6506DD;
+    --settime-purple-hover: #5408AF;
+}
+
 .material-symbols-outlined {
     font-variation-settings:
     'FILL' 0,
@@ -31,14 +45,14 @@ body {
     justify-content: center;
     align-items: center;
     height: 100dvh;
-    background-color: #2E73B2;
+    background-color: var(--background-blue);
 }
 
 .clock {
     padding: 10px 20px;
     border-radius: 15px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    background-color: #E1E1E1;
+    box-shadow: 0 0 5px var(--shadow-black);
+    background-color: var(--white-clock);
     display: flex;
     justify-content: center;
     align-self: center;
@@ -62,41 +76,41 @@ body {
     width: 8rem;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px var(--shadow-black);
     cursor: pointer;
     transition: background-color 250ms ease;
 }
 
 .buttons button#control.start {
-    background-color: #07BA07;
-}
+    background-color: var(--control-green);
 
-.buttons button#control.start:hover {
-    background-color: #0d9f0d;
+    &:hover {
+        background-color: var(--control-green-hover);
+    }
 }
 
 .buttons button#control.pause {
-    background-color: #e6cd10;
-}
+    background-color: var(--control-yellow);
 
-.buttons button#control.pause:hover {
-    background-color: #cfb80b;
+    &:hover {
+        background-color: var(--control-yellow-hover);
+    }
 }
 
 .buttons button#restart {
-    background-color: #D40C0C;
+    background-color: var(--restart-red);
+
+    &:hover {
+        background-color: var(--restart-red-hover);
+    }
 }
 
 .buttons button#settime {
-    background-color: #6506DD;
-}
+    background-color: var(--settime-purple);
 
-.buttons button#restart:hover {
-    background-color: #b40d0d;
-}
-
-.buttons button#settime:hover {
-    background-color: #5408af;
+    &:hover {
+        background-color: var(--settime-purple-hover);
+    }
 }
 
 .buttons button span {
