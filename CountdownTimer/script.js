@@ -46,8 +46,9 @@ function restartTime() {
 
 function setTime() {
     let inputTime = prompt("Enter amount of time [00:00:00]:");
+    const validTimeRegex = /^[0-9]{2}[:][0-9]{2}[:][0-9]{2}$/g;
     
-    while ((inputTime.match(/^[0-9]{2}[:][0-9]{2}[:][0-9]{2}$/g) || []).length !== 1) {
+    while ((inputTime.match(validTimeRegex) || []).length !== 1) {
         alert("Enter a valid amount of time. Like this: 00:00:00");
         inputTime = prompt("Enter amount of time [00:00:00]:");
     }
