@@ -1,12 +1,12 @@
 const buttonVisibleHiddenPassword = document.getElementById("imgshowpassword");
-const inputPassword = document.getElementById("ipassword");
+const inputPassword = document.getElementById("inputpassword");
 const passwordLength = document.getElementById("passwordlengthinput");
 const passwordLengthCount = document.getElementById("passwordlengthcount");
 const passwordCopyButton = document.getElementById("passwordcopybutton");
 const passwordGenerateButton = document.getElementById("generate-button");
 
 buttonVisibleHiddenPassword.addEventListener("click", toggleVisibleHiddenPassword);
-inputPassword.addEventListener("input", showPasswordValidation);
+inputPassword.addEventListener("input", validatePassword);
 passwordCopyButton.addEventListener("click", copyPassword);
 passwordLength.addEventListener("input", () => { passwordLengthCount.innerHTML = passwordLength.value.toString(); });
 passwordGenerateButton.addEventListener("click", generatePassword);
@@ -21,7 +21,7 @@ function toggleVisibleHiddenPassword() {
     inputPassword.type = "password";
 }
 
-function showPasswordValidation() {
+function validatePassword() {
     let passwordLevel = getPasswordLevel(inputPassword.value);
     let passwordClassification = { srcImg : "", textSpan : "" };
     let passwordValidatorImage = document.getElementById("passwordvalidationimg");
@@ -58,13 +58,14 @@ function generatePassword() {
     const includeNumbers = document.getElementById("includenumbers").checked;
     const includeSymbols = document.getElementById("includesymbols").checked;
     const length = parseInt(passwordLength.value);
+    const minimumLength = [includeLowercase, includeUppercase, includeNumbers, includeSymbols].filter((x) => x).length;
     
-    if (!(includeLowercase || includeUppercase || includeNumbers || includeSymbols) || length < [includeLowercase, includeUppercase, includeNumbers, includeSymbols].filter((x) => x).length) {
+    if (!(includeLowercase || includeUppercase || includeNumbers || includeSymbols) || length < minimumLength) {
         alert("Enter Valid Parameters.");
         return;
     }
     
-    let requiredPassword = { chars : "", level : 0};
+    const requiredPassword = { chars : "", level : 0};
     if (includeLowercase) requiredPassword.chars += "abcdefghijklmnopqrstuvwxyz";
     if (includeUppercase) requiredPassword.chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     if (includeNumbers) requiredPassword.chars += "0123456789";
@@ -84,5 +85,5 @@ function generatePassword() {
         }
     }
 
-    showPasswordValidation()
+    validatePassword()
 }

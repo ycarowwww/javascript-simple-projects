@@ -10,24 +10,29 @@
     <body>
         <main>
             <div class="password">
-                <input type="password" name="ipassword" id="ipassword" placeholder="Password">
+                <input type="password" name="inputpassword" id="inputpassword" placeholder="Password">
                 <img src="images/visible.png" alt="Visible/Hidden Password" id="imgshowpassword">
             </div>
+
             <div class="password-utilities">
                 <p>
                     <img src="images/password_unknown.svg" alt="Password Validation" id="passwordvalidationimg">
                     <span id="passwordvalidationspan">Unknown Password</span>
                 </p>
+                
                 <button id="passwordcopybutton">
                     <img src="images/copy.png" alt="Copy Icon">
                     <span>Copy</span>
                 </button>
             </div>
+
             <div class="password-generator-attributes">
                 <input type="range" name="passwordlengthinput" id="passwordlengthinput" min="0" max="50" value="0">
-                <div class="password-generator-attributes-others">
+
+                <div>
                     <p>Character Length: <span id="passwordlengthcount">0</span></p>
-                    <div class="password-generator-attributes-checkboxes">
+
+                    <div class="password-requirements">
                         <input type="checkbox" name="includelowercase" id="includelowercase">
                         <label for="includelowercase">a-z</label>
                         <input type="checkbox" name="includeuppercase" id="includeuppercase">
@@ -39,10 +44,12 @@
                     </div>
                 </div>
             </div>
+
             <div class="password-generator-button">
                 <button id="generate-button">Generate Password</button>
             </div>
         </main>
+
         <script src="script.js"></script>
     </body>
 </html>

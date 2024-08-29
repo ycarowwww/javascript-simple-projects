@@ -44,7 +44,7 @@ main {
     position: relative;
 }
 
-#ipassword {
+#inputpassword {
     display: block;
     width: 100%;
     padding: 10px 15px;
@@ -121,7 +121,7 @@ main {
     cursor: pointer;
 }
 
-.password-generator-attributes-others {
+.password-generator-attributes > div {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -131,7 +131,7 @@ main {
     }
 }
 
-.password-generator-attributes-checkboxes {
+.password-requirements {
     & > input {
         height: .6rem;
     }
