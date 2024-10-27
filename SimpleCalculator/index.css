@@ -1,0 +1,199 @@
+@charset "UTF-8";
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+:root {
+    --calc-color-1: #E5E5E5;
+    --calc-color-2: #FAFAFA;
+    --calc-color-3: #CACACA;
+    --button-color-1: #E5E5E5;
+    --button-color-2: #6564BF;
+    --button-color-3: #2C2776;
+    --theme-switcher-color-1: #222431;
+    --theme-switcher-color-2: #767886;
+    --main-font-color: #272A3D;
+    --secondary-font-color: #767886;
+    --shadow-1: rgba(0, 0, 0, .5);
+}
+
+@property --bg-color-1 {
+  syntax: '<color>';
+  initial-value: #6564BF;
+  inherits: false;
+}
+
+@property --bg-color-2 {
+  syntax: '<color>';
+  initial-value: #4C4BA6;
+  inherits: false;
+}
+
+.dark-theme {
+    --bg-color-1: #2C2776;
+    --bg-color-2: #130E5D;
+    --calc-color-1: #272A3D;
+    --calc-color-2: #222431;
+    --calc-color-3: #1C1D29;
+    --theme-switcher-color-1: #ADADAD;
+    --theme-switcher-color-2: #FAFAFA;
+    --main-font-color: #E5E5E5;
+    --secondary-font-color: #ADADAD;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    min-height: 100dvh;
+    background-image: linear-gradient(145deg, var(--bg-color-1), var(--bg-color-2));
+    transition: --bg-color-1 .5s ease, --bg-color-2 .5s ease;
+}
+
+main {
+    width: min(100dvw, 27rem);
+    border-radius: 15px;
+    background-color: var(--calc-color-1);
+    box-shadow: 0 0 5px var(--shadow-1);
+    transition: background-color .5s ease;
+}
+
+main .display {
+    padding: 15px;
+}
+
+main .top-display {
+    color: var(--main-font-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+main .top-display h1 {
+    font-size: 1.5rem;
+}
+
+main .top-display #theme-switcher {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .8rem;
+    padding: .3rem .5rem;
+    border: 0;
+    border-radius: 2rem;
+    outline: 0;
+    background-color: var(--calc-color-2);
+    box-shadow: 0 0 4px var(--shadow-1);
+    transition: color .5s ease, background-color .5s ease, box-shadow .5s ease;
+    cursor: pointer;
+}
+
+main .top-display #theme-switcher:hover {
+    box-shadow: 0 0 6px 2px var(--shadow-1);
+}
+
+main .top-display #theme-switcher span {
+    font-size: 1.5rem;
+}
+
+main .top-display #theme-switcher span:nth-child(1) {
+    color: var(--theme-switcher-color-1);
+}
+
+main .top-display #theme-switcher span:nth-child(2) {
+    color: var(--theme-switcher-color-2);
+}
+
+main .display input {
+    font-weight: bold;
+    text-align: right;
+    display: block;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+}
+
+main .display #operation-history {
+    color: var(--secondary-font-color);
+    font-size: 1.25rem;
+}
+
+main .display #current-number {
+    color: var(--main-font-color);
+    font-size: 2.75rem;
+}
+
+main .buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: var(--calc-color-2);
+    box-shadow: 0 0 4px var(--shadow-1);
+    transition: background-color .5s ease;
+}
+
+main .buttons button {
+    color: var(--main-font-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 10px;
+    border: 0;
+    border-radius: 10px;
+    outline: 0;
+    background-color: var(--calc-color-1);
+    box-shadow: 0 0 4px var(--shadow-1);
+    transition: background-color .5s ease, box-shadow .5s ease;
+    cursor: pointer;
+}
+
+main .buttons button:hover {
+    background-color: var(--calc-color-3);
+    box-shadow: 0 0 8px var(--shadow-1);
+}
+
+main .buttons :where(button, button span) {
+    font-size: 2rem;
+}
+
+main .buttons .clear-buttons {
+    color: var(--button-color-2);
+}
+
+main .buttons .operation-buttons {
+    color: var(--button-color-1);
+    background-color: var(--button-color-2);
+}
+
+main .buttons .operation-buttons:hover {
+    background-color: var(--button-color-3);
+}
+
+@media screen and (max-width: 18rem) {
+    main :where(.display, .buttons) {
+        padding: 9px;
+    }
+    
+    main .buttons {
+        gap: 9px;
+        border-radius: 9px;
+    }
+}
