@@ -129,7 +129,7 @@ const currentNumber = document.getElementById("current-number");
 const calculator = new Calculator(currentNumber, historyElement);
 
 themeSwitcherButton.addEventListener("click", switchTheme);
-buttons.addEventListener("click", (event) => { buttonSelector(event) });
+buttons.addEventListener("click", buttonSelector);
 
 function switchTheme() {
     document.body.classList.toggle("dark-theme");
