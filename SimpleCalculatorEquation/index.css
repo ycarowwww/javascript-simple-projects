@@ -4,12 +4,12 @@
     --background-black: #0F1923;
     --background-white: #D4CBCB;
     --font-white: #FDF5E0;
-    --font-red: #ff0256;
-    --background-green: #00b84c;
-    --background-lightgreen: #14c25d;
-    --font-green: #15c960;
+    --font-red: #FF0256;
+    --background-green: #00B84C;
+    --background-lightgreen: #14C25D;
+    --font-green: #15C960;
     --background-gray: #373D3E;
-    --background-lightgray: #565d5e;
+    --background-lightgray: #565D5E;
 }
 
 *, *::before, *::after {
@@ -22,10 +22,6 @@ input, button {
     padding: 0;
     outline: 0;
     border: 0;
-}
-
-html {
-    font-size: 10px;
 }
 
 body {
@@ -52,7 +48,7 @@ main {
 
 .equation input {
     color: var(--font-white);
-    font-size: 4rem;
+    font-size: 2rem;
     font-weight: bold;
     text-align: right;
     max-width: 350px;
@@ -75,7 +71,7 @@ main {
 
 .buttons button {
     color: var(--font-white);
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: bold;
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -89,7 +85,7 @@ main {
 
 .buttons button:hover {
     background-color: var(--background-lightgray);
-    font-size: 4rem;
+    font-size: 3rem;
 }
 
 .buttons button.buttons--clear {

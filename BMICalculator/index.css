@@ -9,10 +9,10 @@
 }
 
 :root {
-    --main-white: #fbfcf8;
+    --main-white: #FBFCF8;
     --shadow-black: rgba(0, 0, 0, 0.5);
-    --shadow-white-1: #fbfcf883;
-    --shadow-white-2: #ffffff80;
+    --shadow-white-1: #FBFCF883;
+    --shadow-white-2: #FFFFFF80;
     --background-blue: #151433;
     --background-main-blue: #1D1B45;
     --blue-1: #3E3A94;
@@ -32,12 +32,8 @@
 h1, p, a, fieldset, input, button {
     margin: 0;
     padding: 0;
-    border: none;
-    outline: none;
-}
-
-html {
-    font-size: 16px;
+    border: 0;
+    outline: 0;
 }
 
 body {

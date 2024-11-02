@@ -5,10 +5,6 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-html {
-    font-size: 16px;
-}
-
 h1, p {
     margin: 0;
 }
@@ -26,9 +22,9 @@ body {
 
 header {
     width: min(100dvw, 750px);
-    padding: 10px 30px;
-    border-radius: 10px;
-    background-color: #0c0a1c;
+    padding: .8rem 1rem;
+    border-radius: .8rem;
+    background-color: #0C0A1C;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
@@ -38,10 +34,10 @@ header {
 }
 
 header h1 {
-    color: #f3f0ed;
-    font-size: 2rem;
+    color: #F3F0ED;
+    font-size: 1.8rem;
     font-weight: bold;
-    text-shadow: 0 0 3px #f3f0ed80;
+    text-shadow: 0 0 3px #F3F0ED80;
 }
 
 .scoreboard {
@@ -54,10 +50,10 @@ header h1 {
 
 .scoreboard > div {
     width: 100%;
-    background-color: #2e3445;
+    background-color: #2E3445;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    padding-block: 5px;
+    border-radius: .6rem;
+    padding-block: .3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -69,13 +65,13 @@ header h1 {
 }
 
 .scoreboard > div > p {
-    color: #f3f0ed;
+    color: #F3F0ED;
     font-size: 1.5rem;
     font-weight: bold;
 }
 
 .scoreboard > div > span {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 
@@ -104,18 +100,18 @@ main div {
     width: max(150px, 25%);
     aspect-ratio: 1 / 1;
     border-radius: 50%;
-    background-color: #f3f0ed;
+    background-color: #F3F0ED;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
 
     &.playerchoice {
-        border: 20px solid #2070e1;
+        border: 20px solid #2070E1;
     }
 
     &.aichoice {
-        border: 20px solid #f98b0d;
+        border: 20px solid #F98B0D;
     }
 }
 
@@ -134,11 +130,11 @@ main div img {
 
 .choice-buttons button {
     all: unset;
-    color: #f3f0ed;
+    color: #F3F0ED;
     text-align: center;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
-    background-color: #2e3445;
+    background-color: #2E3445;
     box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.5);
     transition: background-color 250ms ease;
     cursor: pointer;

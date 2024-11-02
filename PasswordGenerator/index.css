@@ -3,9 +3,9 @@
 :root {
     --lightblue: #1775E0;
     --darkblue: #1635E0;
-    --lightbluehover: #e4f0ff;
-    --yellowcopybutton: #ffd700;
-    --yellowcopybuttonhover: #ecca06;
+    --lightbluehover: #E4F0FF;
+    --yellowcopybutton: #FFD700;
+    --yellowcopybuttonhover: #ECCA06;
     --shadow1: rgba(0, 0, 0, 0.5);
 }
 
@@ -16,10 +16,6 @@
 
 p, input, label {
     margin: 0;
-}
-
-html {
-    font-size: 20px;
 }
 
 body {
@@ -35,8 +31,8 @@ body {
 main {
     background-color: white;
     width: min(100dvw, 500px);
-    padding: 20px;
-    border-radius: 10px;
+    padding: 1rem;
+    border-radius: .8rem;
     box-shadow: 0 0 8px var(--shadow1);
 }
 
@@ -47,9 +43,9 @@ main {
 #inputpassword {
     display: block;
     width: 100%;
-    padding: 10px 15px;
+    padding: .7rem .8rem;
     border: 2px solid lightgray;
-    border-radius: 5px;
+    border-radius: .4rem;
     outline: none;
     font-size: .8rem;
     transition: background-color 250ms ease;
@@ -78,14 +74,14 @@ main {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding-block: 10px;
+    padding-block: .5rem;
 
     & > :where(p, button) {
         font-size: .7rem;
     }
 
     & img {
-        height: .9rem;
+        height: 1rem;
     }
 
     & > p {
@@ -154,10 +150,10 @@ main {
     background-color: var(--lightblue);
     box-shadow: 0 0 5px var(--shadow1);
     border: 0;
-    border-radius: 10px;
+    border-radius: .6rem;
     outline: 0;
-    margin-top: 15px;
-    padding-block: 10px;
+    margin-top: .8rem;
+    padding-block: .6rem;
     transition: background-color .5s, box-shadow .5s;
     cursor: pointer;
 
