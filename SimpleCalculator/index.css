@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.material-symbols-outlined {
+.material-symbols-outlined { /* Google Fonts CSS. */
     font-variation-settings:
     'FILL' 0,
     'wght' 400,
@@ -8,7 +8,7 @@
     'opsz' 24;
 }
 
-:root {
+:root { /* color palette (white theme by default). */
     --calc-color-1: #E5E5E5;
     --calc-color-2: #FAFAFA;
     --calc-color-3: #CACACA;
@@ -34,7 +34,7 @@
   inherits: false;
 }
 
-.dark-theme {
+body.dark-theme {
     --bg-color-1: #2C2776;
     --bg-color-2: #130E5D;
     --calc-color-1: #272A3D;
@@ -68,7 +68,7 @@ main {
     width: min(100dvw, 27rem);
     border-radius: 15px;
     background-color: var(--calc-color-1);
-    box-shadow: 0 0 5px var(--shadow-1);
+    box-shadow: 0 0 3px var(--shadow-1);
     transition: background-color .5s ease;
 }
 
@@ -98,13 +98,13 @@ main .top-display #theme-switcher {
     border-radius: 2rem;
     outline: 0;
     background-color: var(--calc-color-2);
-    box-shadow: 0 0 4px var(--shadow-1);
+    box-shadow: 0 0 2px var(--shadow-1);
     transition: color .5s ease, background-color .5s ease, box-shadow .5s ease;
     cursor: pointer;
 }
 
 main .top-display #theme-switcher:hover {
-    box-shadow: 0 0 6px 2px var(--shadow-1);
+    box-shadow: 0 0 3px var(--shadow-1);
 }
 
 main .top-display #theme-switcher span {
@@ -139,18 +139,18 @@ main .display #current-number {
     font-size: 2.75rem;
 }
 
-main .buttons {
+#buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
     padding: 15px;
     border-radius: 15px;
     background-color: var(--calc-color-2);
-    box-shadow: 0 0 4px var(--shadow-1);
+    box-shadow: 0 0 3px var(--shadow-1);
     transition: background-color .5s ease;
 }
 
-main .buttons button {
+#buttons button {
     color: var(--main-font-color);
     display: flex;
     justify-content: center;
@@ -160,39 +160,39 @@ main .buttons button {
     border-radius: 10px;
     outline: 0;
     background-color: var(--calc-color-1);
-    box-shadow: 0 0 4px var(--shadow-1);
+    box-shadow: 0 0 2px var(--shadow-1);
     transition: background-color .5s ease, box-shadow .5s ease;
     cursor: pointer;
 }
 
-main .buttons button:hover {
+#buttons button:hover {
     background-color: var(--calc-color-3);
-    box-shadow: 0 0 8px var(--shadow-1);
+    box-shadow: 0 0 4px var(--shadow-1);
 }
 
-main .buttons :where(button, button span) {
+#buttons :where(button, button span) {
     font-size: 2rem;
 }
 
-main .buttons .clear-buttons {
+#buttons .clear-buttons {
     color: var(--button-color-2);
 }
 
-main .buttons .operation-buttons {
+#buttons .operation-buttons {
     color: var(--button-color-1);
     background-color: var(--button-color-2);
 }
 
-main .buttons .operation-buttons:hover {
+#buttons .operation-buttons:hover {
     background-color: var(--button-color-3);
 }
 
 @media screen and (max-width: 18rem) {
-    main :where(.display, .buttons) {
+    main :where(.display, #buttons) {
         padding: 9px;
     }
     
-    main .buttons {
+    #buttons {
         gap: 9px;
         border-radius: 9px;
     }

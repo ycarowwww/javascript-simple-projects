@@ -1,3 +1,3 @@
 # A Simple Calculator
 
-A Simple Single Operation Calculator, like the Windows calculator, using modern ES6 classes and a bit of Event Delegation. It also contains a Theme Switcher.
+A simple single-operation calculator, inspired by the Windows calculator, built using modern ES6 classes and event delegation. It includes a theme switcher that saves the user's preferred theme in local storage and automatically checks their system preference.

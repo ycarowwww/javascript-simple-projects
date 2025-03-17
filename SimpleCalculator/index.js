@@ -2,21 +2,17 @@ class Calculator {
     constructor(inputElement, historyElement) {
         this.inputElement = inputElement;
         this.historyElement = historyElement;
-        this.currentOperation = "";
-        this.currentOperand = "";
-        this.previousOperation = "";
-        this.previousOperand = "";
-        this.lastOperand = "";
-        this.cleanNextMove = false;
+        this.clearAll(); // Using this method to create the properties.
     }
 
     appendNumber(number) {
-        if (this.cleanNextMove) this.currentOperand = "";
-        if (number === "0" && this.currentOperand === "0") return;
-        if (number === ".") {
+        if (this.cleanNextMove) this.currentOperand = "0"; // If an operation was used previously, clear the current input number and enter the new number.
+        if (number === ".") { // If the number already includes a "." or doesn't exist (length 0), then do nothing.
             if (this.currentOperand.includes(".") || this.currentOperand.length === 0) return;
-        } else if (this.currentOperand === "0") {
+        } else if (this.currentOperand === "0") { // If the current input number is just a "0", then just replace it (and the "number" isn't a ".").
             this.currentOperand = number;
+            this.updateDisplay();
+            this.cleanNextMove = false;
             return;
         }
 
@@ -46,7 +42,7 @@ class Calculator {
         this.lastOperand = "";
         this.updateDisplay();
         this.updateHistory();
-        this.cleanNextMove = false;
+        this.cleanNextMove = false; // If a number is entered after using an operation, the number that is there will be automatically deleted.
     }
 
     clearLastCharacter() {
@@ -70,11 +66,11 @@ class Calculator {
     compute() {
         let computation, prev, current;
         if (this.previousOperand) {
-            prev = parseFloat(this.previousOperand);
-            current = parseFloat(this.currentOperand);
+            prev = Number(this.previousOperand);
+            current = Number(this.currentOperand);
         } else {
-            prev = parseFloat(this.currentOperand);
-            current = parseFloat(this.lastOperand);
+            prev = Number(this.currentOperand);
+            current = Number(this.lastOperand);
         }
         if (!this.currentOperation) this.currentOperation = this.previousOperation;
 
@@ -97,6 +93,12 @@ class Calculator {
                 return;
         }
 
+        if (!isFinite(computation)) { // If the result is some "error", like "NaN" or "Infinity", then just clear all and display an Error message.
+            this.clearAll();
+            this.inputElement.value = "Error";
+            return;
+        }
+
         this.updateHistory(prev, current, this.currentOperation);
         this.currentOperand = computation.toString();
         this.previousOperation = this.currentOperation;
@@ -112,9 +114,9 @@ class Calculator {
     }
 
     updateHistory(prev = "", current = "", operation = "") {
-        if (current) {
+        if (current !== "") {
             this.historyElement.value = `${prev} ${operation} ${current} =`;
-        } else if (prev) {
+        } else if (prev !== "") {
             this.historyElement.value = `${prev} ${operation}`;
         } else {
             this.historyElement.value = "";
@@ -123,7 +125,7 @@ class Calculator {
 }
 
 const themeSwitcherButton = document.getElementById("theme-switcher");
-const buttons = document.getElementsByClassName("buttons")[0];
+const buttons = document.getElementById("buttons");
 const historyElement = document.getElementById("operation-history");
 const currentNumber = document.getElementById("current-number");
 const calculator = new Calculator(currentNumber, historyElement);
@@ -133,6 +135,23 @@ buttons.addEventListener("click", buttonSelector);
 
 function switchTheme() {
     document.body.classList.toggle("dark-theme");
+    saveThemeOnStorage(document.body.classList.contains("dark-theme"));
+}
+
+function saveThemeOnStorage(isDarkTheme) {
+    localStorage.setItem("theme", isDarkTheme ? "dark" : "white");
+}
+
+function loadSavedTheme() {
+    const isDarkTheme = localStorage.getItem("theme");
+
+    if (isDarkTheme === "dark") {
+        document.body.classList.add("dark-theme");
+    } else if (isDarkTheme === "white") {
+        document.body.classList.remove("dark-theme");
+    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) { // Check the user's default color theme
+        document.body.classList.add("dark-theme");
+    }
 }
 
 function buttonSelector(event) {
@@ -161,3 +180,5 @@ function buttonSelector(event) {
         else calculator.chooseOperation(button.innerText);
     }
 }
+
+loadSavedTheme();
