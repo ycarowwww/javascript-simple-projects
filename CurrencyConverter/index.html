@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Currency Converter</title>
+        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    </head>
+    <body>
+        <main>
+            <div class="top-display">
+                <h1>Currency Converter</h1>
+                <button id="theme-switcher"><span class="material-symbols-outlined">light_mode</span><span class="material-symbols-outlined">dark_mode</span></button>
+            </div>
+
+            <div id="converter">
+                <div class="currency-selector">
+                    <div class="selected">
+                        <img src="./images/any.png" alt="Selected Currency Logo or Country" class="selected__image">
+                        <p><span class="selected__name">Any Currency</span> <span class="selected__id">any</span></p>
+                        <img src="./images/arrow.svg" alt="Arrow Symbol" class="selected__logo">
+                    </div>
+
+                    <ul class="currency-list">
+                        <li class="search-currencies">
+                            <input type="search" name="currency-search" id="currency-search-1" placeholder="Search">
+                        </li>
+                    </ul>
+                </div>
+                <input type="text" name="currency-input" id="currency-input-1" value="0.00">
+                <p id="normal-currency-rate-1"></p>
+
+                <button id="currency__swap"><span class="material-symbols-outlined">sync_alt</span></button>
+                
+                <div class="currency-selector">
+                    <div class="selected">
+                        <img src="./images/any.png" alt="Selected Currency Logo or Country" class="selected__image">
+                        <p><span class="selected__name">Any Currency</span> <span class="selected__id">any</span></p>
+                        <img src="./images/arrow.svg" alt="Arrow Symbol" class="selected__logo">
+                    </div>
+
+                    <ul class="currency-list">
+                        <li class="search-currencies">
+                            <input type="search" name="currency-search" id="currency-search-2" placeholder="Search">
+                        </li>
+                    </ul>
+                </div>
+                <input type="text" name="currency-input" id="currency-input-2" value="0.00">
+                <p id="normal-currency-rate-2"></p>
+            </div>
+        </main>
+
+        <template id="currency-element-template"> <!-- Template for the currencies list's element -->
+            <li>
+                <img src="" alt="Currency Element Logo or Country" class="currency-element__image">
+                <p><span class="currency-element__name"></span> <span class="currency-element__id"></span></p>
+            </li>
+        </template>
+
+        <script src="codes.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
