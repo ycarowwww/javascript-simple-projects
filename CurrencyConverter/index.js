@@ -13,20 +13,22 @@ const currencyRate2 = document.getElementById("normal-currency-rate-2");
 const currencyInput1 = document.getElementById("currency-input-1");
 const currencyInput2 = document.getElementById("currency-input-2");
 const themeSwitcherButton = document.getElementById("theme-switcher");
-const currentCurrenciesCodes = [ "any", "any" ];
+const currentCurrencyCodes = [ "any", "any" ];
+let selectedCurrencyOption = -1; // Selected Option on the visible list.
 const apiLink = "https://economia.awesomeapi.com.br/last/";
 let bid = null;
-
+// "codes" is on the "codes.js" file.
 for (const code in codes) {
     for (const list of currencyLists) {
         const elementList = currencyElementTemplate.content.cloneNode(true);
 
         const elementImg = elementList.querySelector(".currency-element__image");
         elementImg.src = `./images/${code}.png`;
+        elementImg.alt = `Currency ${code.toUpperCase()} Logo.`;
         const elementName = elementList.querySelector(".currency-element__name");
-        elementName.innerHTML = codes[code];
+        elementName.textContent = codes[code];
         const elementId = elementList.querySelector(".currency-element__id");
-        elementId.innerHTML = code;
+        elementId.textContent = code;
 
         list.appendChild(elementList);
     }
@@ -34,7 +36,14 @@ for (const code in codes) {
 
 for (let i = 0; i < selectedSelectors.length; i++) {
     selectedSelectors[i].addEventListener("click", showCurrencyList(i));
+    selectedSelectors[i].addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            showCurrencyList(i)();
+        }
+    });
     currencyLists[i].addEventListener("click", changeSelected(i));
+    currencyLists[i].addEventListener("keydown", focusOption(i));
 }
 
 document.body.addEventListener("click", checkClick);
@@ -51,8 +60,21 @@ themeSwitcherButton.addEventListener("click", switchTheme);
 function showCurrencyList(index) {
     return () => {
         currencyLists[index].classList.toggle("active");
-        currencyLists[index === 0 ? 1 : 0].classList.remove("active"); // Removes the "active" from the other List.
+        const isOpen = currencyLists[index].classList.contains("active");
+        selectedSelectors[index].ariaExpanded = isOpen;
+        currencyLists[index].ariaHidden = !isOpen;
+
+        hideCurrencyList(index === 0 ? 1 : 0);
     };
+}
+
+function hideCurrencyList(index) {
+    currencyLists[index].classList.remove("active");
+    selectedSelectors[index].ariaExpanded = "false";
+    currencyLists[index].ariaHidden = "true";
+    selectedCurrencyOption = -1;
+    updateFocusOption(0);
+    updateFocusOption(1);
 }
 
 function changeSelected(index) {
@@ -61,7 +83,7 @@ function changeSelected(index) {
 
         if (!listElement) return;
 
-        const newCode = listElement.querySelector(".currency-element__id").innerHTML;
+        const newCode = listElement.querySelector(".currency-element__id").textContent;
         setSelected(index, newCode);
         calculateBid();
         currencyLists[index].classList.remove("active");
@@ -72,18 +94,17 @@ function checkClick(event) { // Hides the selectors if the click was outside.
     const selector = event.target.closest(".currency-selector");
 
     if (!selector) {
-        for (const list of currencyLists) {
-            list.classList.remove("active");
-        }
+        hideCurrencyList(0);
+        hideCurrencyList(1);
     }
 }
 
 function swapCurrencies() {
-    if (currentCurrenciesCodes.includes("any")) return;
+    if (currentCurrencyCodes.includes("any")) return;
 
-    currentCurrenciesCodes.reverse();
-    setSelected(0, currentCurrenciesCodes[0]);
-    setSelected(1, currentCurrenciesCodes[1]);
+    currentCurrencyCodes.reverse();
+    setSelected(0, currentCurrencyCodes[0]);
+    setSelected(1, currentCurrencyCodes[1]);
     calculateBid();
     const temp = currencyInput1.value;
     currencyInput1.value = currencyInput2.value;
@@ -103,22 +124,59 @@ function searchCurrencies(indexSelector) {
     };
 }
 
+function focusOption(currencyListIndex) {
+    return event => { // Handle the keys to select the options of the currency lists.
+        if (currencyLists[currencyListIndex].ariaHidden === "true") return;
+
+        if (event.key === "ArrowDown") {
+            event.preventDefault();
+            selectedCurrencyOption = (selectedCurrencyOption + 1) % Object.keys(codes).length;
+        } else if (event.key === "ArrowUp") {
+            event.preventDefault();
+            selectedCurrencyOption = (selectedCurrencyOption - 1) % Object.keys(codes).length;
+            if (selectedCurrencyOption < 0) selectedCurrencyOption = Object.keys(codes).length - 1; // the "%" operator in JS, for some reason, doesn't compute negative numbers in the right way.
+        } else if (event.key === "Enter") {
+            event.preventDefault();
+            if (selectedCurrencyOption >= 0) {
+                const newCode = currencyLists[currencyListIndex].querySelectorAll("li:not(.search-currencies, .hide) .currency-element__id")[selectedCurrencyOption].textContent;
+                setSelected(currencyListIndex, newCode);
+                calculateBid();
+                hideCurrencyList(currencyListIndex);
+            }
+        } else if (event.key === "Escape") {
+            hideCurrencyList(currencyListIndex);
+        }
+
+        updateFocusOption(currencyListIndex);
+    };
+}
+
+function updateFocusOption(currencyListIndex) { // Show on the screen the currenct focused option.
+    const options = currencyLists[currencyListIndex].querySelectorAll("li:not(.search-currencies, .hide)");
+    options.forEach((opt, ind) => {
+        opt.ariaSelected = (ind === selectedCurrencyOption).toString();
+        opt.tabIndex = ind === selectedCurrencyOption ? "0" : "-1";
+        if (ind === selectedCurrencyOption) opt.focus();
+    });
+}
+
 function setSelected(index, newCode) {
-    const otherCode = currentCurrenciesCodes[index === 0 ? 1 : 0];
+    const otherCode = currentCurrencyCodes[index === 0 ? 1 : 0];
     if (newCode === otherCode) { // Swap the selecteds if they are equal.
         swapCurrencies();
         return;
     }
 
-    currentCurrenciesCodes[index] = newCode;
+    currentCurrencyCodes[index] = newCode;
 
     const selectedImg = selectedImgSelectors[index];
     const selectedName = selectedNameSelectors[index];
     const selectedId = selectedIdSelectors[index];
 
-    selectedImg.src = `./images/${currentCurrenciesCodes[index]}.png`;
-    selectedName.innerHTML = codes[currentCurrenciesCodes[index]];
-    selectedId.innerHTML = currentCurrenciesCodes[index];
+    selectedImg.src = `./images/${currentCurrencyCodes[index]}.png`;
+    selectedImg.alt = `Currency ${currentCurrencyCodes[index].toUpperCase()} Logo.`;
+    selectedName.textContent = codes[currentCurrencyCodes[index]];
+    selectedId.textContent = currentCurrencyCodes[index];
 }
 
 function validateCurrencyProcess(indexInput) {
@@ -133,12 +191,12 @@ function validateCurrencyProcess(indexInput) {
 }
 
 function convertCurrency(indexInput) {
-    if (currentCurrenciesCodes.includes("any")) return;
+    if (currentCurrencyCodes.includes("any")) return;
     
     if (indexInput === 0) {
-        currencyInput2.value = currencyInput1.value * bid;
+        currencyInput2.value = (currencyInput1.value * bid).toFixed(2);
     } else {
-        currencyInput1.value = currencyInput2.value / bid;
+        currencyInput1.value = (currencyInput2.value / bid).toFixed(2);
     }
 }
 
@@ -161,10 +219,10 @@ function limitCurrencyListSize() { /* Limits the list size */
 }
 
 function calculateBid() {
-    if (currentCurrenciesCodes.includes("any")) return;
+    if (currentCurrencyCodes.includes("any")) return;
 
     converter.classList.add("loading"); // "Loading effect"
-    const currencies = currentCurrenciesCodes.map(cur => cur.toUpperCase());
+    const currencies = currentCurrencyCodes.map(cur => cur.toUpperCase());
     let link = apiLink;
     let bidFunction = null;
     if (!currencies.includes("USD")) { // Due to API limitations, we convert currencies to USD and then to each other.
@@ -197,9 +255,9 @@ function calculateBid() {
 }
 
 function displayNormalCurrencyRate() {
-    const codes = currentCurrenciesCodes.map(v => v.toUpperCase());
-    currencyRate1.innerHTML = `1 ${codes[0]} = ${bid.toPrecision(5)} ${codes[1]}`;
-    currencyRate2.innerHTML = `1 ${codes[1]} = ${(1 / bid).toPrecision(5)} ${codes[0]}`;
+    const codes = currentCurrencyCodes.map(v => v.toUpperCase());
+    currencyRate1.innerHTML = `1 ${codes[0]} = ${bid.toFixed(2)} ${codes[1]}`;
+    currencyRate2.innerHTML = `1 ${codes[1]} = ${(1 / bid).toFixed(2)} ${codes[0]}`;
 }
 
 function switchTheme() {

@@ -17,15 +17,15 @@
 
             <div id="converter">
                 <div class="currency-selector">
-                    <div class="selected">
-                        <img src="./images/any.png" alt="Selected Currency Logo or Country" class="selected__image">
+                    <div class="selected" role="combobox" aria-controls="currency-list-1" aria-haspopup="currency-list-1" tabindex="0" aria-expanded="false" aria-label="Select a currency">
+                        <img src="./images/any.png" alt="No Currency Selected Logo" class="selected__image">
                         <p><span class="selected__name">Any Currency</span> <span class="selected__id">any</span></p>
                         <img src="./images/arrow.svg" alt="Arrow Symbol" class="selected__logo">
                     </div>
 
-                    <ul class="currency-list">
+                    <ul class="currency-list" id="currency-list-1" role="listbox" aria-hidden="true">
                         <li class="search-currencies">
-                            <input type="search" name="currency-search" id="currency-search-1" placeholder="Search">
+                            <input type="search" name="currency-search" id="currency-search-1" placeholder="Search Currency" aria-label="Search for a Currency">
                         </li>
                     </ul>
                 </div>
@@ -35,15 +35,15 @@
                 <button id="currency__swap"><span class="material-symbols-outlined">sync_alt</span></button>
                 
                 <div class="currency-selector">
-                    <div class="selected">
-                        <img src="./images/any.png" alt="Selected Currency Logo or Country" class="selected__image">
+                    <div class="selected" role="combobox" aria-controls="currency-list-2" aria-haspopup="currency-list-2" tabindex="0" aria-expanded="false" aria-label="Select a currency">
+                        <img src="./images/any.png" alt="No Currency Selected Logo" class="selected__image">
                         <p><span class="selected__name">Any Currency</span> <span class="selected__id">any</span></p>
                         <img src="./images/arrow.svg" alt="Arrow Symbol" class="selected__logo">
                     </div>
 
-                    <ul class="currency-list">
+                    <ul class="currency-list" id="currency-list-2" role="listbox" aria-hidden="true">
                         <li class="search-currencies">
-                            <input type="search" name="currency-search" id="currency-search-2" placeholder="Search">
+                            <input type="search" name="currency-search" id="currency-search-2" placeholder="Search Currency" aria-label="Search for a Currency">
                         </li>
                     </ul>
                 </div>
@@ -53,8 +53,8 @@
         </main>
 
         <template id="currency-element-template"> <!-- Template for the currencies list's element -->
-            <li>
-                <img src="" alt="Currency Element Logo or Country" class="currency-element__image">
+            <li role="option" tabindex="-1" aria-selected="false">
+                <img src="" alt="Currency Logo or Country" class="currency-element__image">
                 <p><span class="currency-element__name"></span> <span class="currency-element__id"></span></p>
             </li>
         </template>

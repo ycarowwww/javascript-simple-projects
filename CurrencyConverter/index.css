@@ -102,7 +102,7 @@ main {
     cursor: pointer;
 }
 
-#theme-switcher:hover {
+#theme-switcher:hover, #theme-switcher:focus {
     box-shadow: 0 0 .1875rem var(--shadow-1);
 }
 
@@ -189,7 +189,9 @@ main {
     transition: transform .3s ease, filter .3s ease;
 }
 
-.selected:hover .selected__logo, .currency-selector:has(ul.active) .selected__logo {
+.selected:hover .selected__logo, 
+.selected:focus .selected__logo,
+.currency-selector:has(ul.active) .selected__logo {
     transform: translateY(-50%) rotate(-180deg);
 }
 
@@ -227,7 +229,7 @@ body.dark-theme .selected .selected__logo { /* "selected__logo" img becomes whit
     cursor: pointer;
 }
 
-.currency-list li:hover {
+.currency-list li:hover, .currency-list li:focus {
     border-color: var(--clr-highlight);
 }
 
@@ -299,7 +301,7 @@ body.dark-theme .selected .selected__logo { /* "selected__logo" img becomes whit
     cursor: pointer;
 }
 
-#currency__swap:hover {
+#currency__swap:hover, #currency__swap:focus {
     background-color: var(--bg-clr-btn-currency-swap-hover);
     box-shadow: 0 0 .25rem var(--shadow-1);
 }
