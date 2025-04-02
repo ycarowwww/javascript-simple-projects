@@ -12,7 +12,7 @@
         <main>
             <div class="top-display">
                 <h1>Currency Converter</h1>
-                <button id="theme-switcher"><span class="material-symbols-outlined">light_mode</span><span class="material-symbols-outlined">dark_mode</span></button>
+                <button id="theme-switcher" aria-label="Switch the website's color theme"><span class="material-symbols-outlined">light_mode</span><span class="material-symbols-outlined">dark_mode</span></button>
             </div>
 
             <div id="converter">
@@ -29,10 +29,10 @@
                         </li>
                     </ul>
                 </div>
-                <input type="text" name="currency-input" id="currency-input-1" value="0.00">
+                <input type="text" name="currency-input" id="currency-input-1" value="0.00" placeholder="Currency 1 Value">
                 <p id="normal-currency-rate-1"></p>
 
-                <button id="currency__swap"><span class="material-symbols-outlined">sync_alt</span></button>
+                <button id="currency__swap" aria-label="Swap Selected Currencies"><span class="material-symbols-outlined">sync_alt</span></button>
                 
                 <div class="currency-selector">
                     <div class="selected" role="combobox" aria-controls="currency-list-2" aria-haspopup="currency-list-2" tabindex="0" aria-expanded="false" aria-label="Select a currency">
@@ -47,7 +47,7 @@
                         </li>
                     </ul>
                 </div>
-                <input type="text" name="currency-input" id="currency-input-2" value="0.00">
+                <input type="text" name="currency-input" id="currency-input-2" value="0.00" placeholder="Currency 2 Value">
                 <p id="normal-currency-rate-2"></p>
             </div>
         </main>
