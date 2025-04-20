@@ -1,0 +1,243 @@
+:root {
+    --background: #191920;
+    --foreground: #F0F0F0;
+    --btn-vsblt-color: #232324;
+    --toggled-btn: #77B1F3;
+    --bg-start-btn: #302EA5;
+    --bg-start-btn-dsbd: #41409E;
+    --bg-stop-btn: #A1241B;
+    --bg-stop-btn-dsbd: #993D36;
+    --bg-add-btn: #16AF51;
+    --bg-add-btn-hover: #12C958;
+    --fg-btn-disabled: #E0E0E0;
+    --shadow: rgba(0, 0, 0, .5);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#screen {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    height: 100dvh;
+    background-color: var(--background);
+    transition: grid-template-columns .3s ease;
+    overflow: hidden;
+}
+
+#screen.closed {
+    grid-template-columns: 100% 0%;
+}
+
+#canvas-container, #main {
+    width: 100%;
+}
+
+#main {
+    padding: .625rem;
+    border-left: .3125rem solid var(--foreground);
+    box-shadow: 0 0 .3125rem var(--foreground);
+    overflow-y: auto;
+}
+
+#main label:has(input[id|="input"]) {
+    color: var(--foreground);
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .3rem;
+    flex-wrap: wrap;
+}
+
+.toggle-button {
+    appearance: none;
+    position: relative;
+    width: 2.5rem;
+    aspect-ratio: 2 / 1;
+    border-radius: 1.25rem;
+    background-color: var(--foreground);
+    box-shadow: 0 0 .1875rem var(--shadow);
+    transition: background-color .3s ease;
+    cursor: pointer;
+}
+
+.toggle-button:checked {
+    background-color: var(--toggled-btn);
+}
+
+.toggle-button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: .2rem;
+    transform: translateY(-50%);
+    width: 1rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background-color: var(--btn-vsblt-color);
+    transition: left .3s ease;
+}
+
+.toggle-button:checked::before {
+    left: calc(100% - 1.2rem);
+}
+
+.control-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: .625rem;
+}
+
+.control-buttons button {
+    color: var(--foreground);
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: .5rem .8rem;
+    border-radius: .5rem;
+    box-shadow: 0 0 .1875rem var(--shadow);
+    cursor: pointer;
+}
+
+#start-game {
+    background-color: var(--bg-start-btn);
+}
+
+#stop-game {
+    background-color: var(--bg-stop-btn);
+}
+
+.control-buttons button:disabled {
+    color: var(--fg-btn-disabled);
+}
+
+#start-game:disabled {
+    background-color: var(--bg-start-btn-dsbd);
+}
+
+#stop-game:disabled {
+    background-color: var(--bg-stop-btn-dsbd);
+}
+
+#population {
+    color: var(--foreground);
+    font-weight: bold;
+}
+
+#teams-title {
+    color: var(--foreground);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#teams-list {
+    margin-block: .5rem;
+}
+
+.team-element {
+    color: var(--foreground);
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+#teams-list li + li {
+    margin-top: .3125rem;
+}
+
+.team-element input {
+    color: inherit;
+    font-size: 1.1rem;
+    border: 0;
+    border-bottom: .125rem solid var(--foreground);
+    outline: 0;
+    background-color: transparent;
+}
+
+.team-element .team-color-square {
+    height: 1.8rem;
+    margin-right: .625rem;
+    aspect-ratio: 1 / 1;
+}
+
+#main > fieldset:has(#input-set:checked) ~ .teams .team-element.selected-to-set .team-color-square {
+    outline: .125rem solid var(--bg-add-btn);
+}
+
+.team-element .team-name {
+    width: 14ch;
+    margin-right: auto;
+}
+
+.team-element .team-color {
+    width: 10ch;
+}
+
+.team-element .team-delete-btn {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.team-element .team-delete-btn img {
+    width: 1.5rem;
+    filter: brightness(0) saturate(100%) invert(14%) sepia(97%) saturate(2121%) hue-rotate(348deg) brightness(110%) contrast(95%);
+}
+
+#add-teams, #reset-teams {
+    color: var(--foreground);
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding-block: .3rem;
+    border-radius: .3rem;
+    width: 100%;
+    box-shadow: 0 0 .1875rem var(--shadow);
+    cursor: pointer;
+}
+
+#add-teams {
+    background-color: var(--bg-add-btn);
+}
+
+#add-teams:hover {
+    background-color: var(--bg-add-btn-hover);
+}
+
+#reset-teams {
+    background-color: var(--bg-stop-btn);
+    margin-top: .625rem;
+}
+
+#reset-teams:hover {
+    background-color: var(--bg-stop-btn-dsbd);
+}
+
+#btn-toggle-visibility {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    width: 3.5rem;
+    aspect-ratio: 1 / 1;
+    border: .125rem solid var(--btn-vsblt-color);
+    border-radius: .5rem;
+    background-color: var(--background);
+    box-shadow: 0 0 .3125rem var(--shadow);
+    transition: background-color .3s ease, box-shadow .3s ease;
+    cursor: pointer;
+}
+
+#btn-toggle-visibility:hover {
+    background-color: var(--btn-vsblt-color);
+    box-shadow: 0 0 .4375rem var(--shadow);
+}
+
+#btn-toggle-visibility__img {
+    width: 3rem;
+    filter: brightness(0) saturate(100%) invert(90%) sepia(43%) saturate(5%) hue-rotate(355deg) brightness(109%) contrast(88%);
+}

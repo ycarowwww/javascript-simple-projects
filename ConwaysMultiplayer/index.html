@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="./index.css">
+    </head>
+    <body>
+        <div id="screen">
+            <div id="canvas-container">
+                <canvas id="game-canvas">Conway's Game of Life</canvas>
+            </div>
+
+            <main id="main">
+                <fieldset>
+                    <label>Enable Movement: <input type="checkbox" name="input-movement" id="input-movement" class="toggle-button"></label>
+                    <label>Enable Zoom: <input type="checkbox" name="input-zoom" id="input-zoom" class="toggle-button"></label>
+                    <label>Enable Set Square: <input type="checkbox" name="input-set" id="input-set" class="toggle-button"></label>
+                </fieldset>
+
+                <p id="population">Population: 0</p>
+
+                <fieldset class="teams">
+                    <p id="teams-title">Teams:</p>
+
+                    <ul id="teams-list">
+                        <li class="team-element">
+                            <div class="team-color-square" style="background-color: #FFFF00;"></div>
+                            <input type="text" name="team-name" class="team-name" placeholder="Team Name" value="Team 1">
+                            <input type="text" name="team-color" class="team-color" placeholder="HEX Code" value="FFFF00">
+                            <button class="team-delete-btn"><img src="images/remove_icon.svg" alt="Icon of an 'X' indicating that the button is to remove the team"></button>
+                        </li>
+                    </ul>
+
+                    <button id="add-teams">Add Team</button>
+                    <button id="reset-teams">Reset Teams</button>
+                </fieldset>
+                
+                <fieldset class="control-buttons">
+                    <button id="start-game">Start Game</button>
+                    <button id="stop-game" disabled>Stop Game</button>
+                </fieldset>
+            </main>
+        </div>
+
+        <button id="btn-toggle-visibility">
+            <img src="./images/opened.svg" alt="An eye indicating the current state of the button" id="btn-toggle-visibility__img">
+        </button>
+
+        <template id="team-element-template">
+            <li class="team-element">
+                <div class="team-color-square"></div>
+                <input type="text" name="team-name" class="team-name" placeholder="Team Name">
+                <input type="text" name="team-color" class="team-color" placeholder="HEX Code">
+                <button class="team-delete-btn"><img src="images/remove_icon.svg" alt="Icon of an 'X' indicating that the button is to remove the team"></button>
+            </li>
+        </template>
+
+        <script src="./index.js"></script>
+    </body>
+</html>
