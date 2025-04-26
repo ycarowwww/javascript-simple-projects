@@ -6,7 +6,7 @@ A repository containing some Javascript projects I made while learning the langu
 
 1. Clone the Repo:
     ```bash
-    git clone https://github.com/Yzakiel1390/javascript-simple-projects.git
+    git clone https://github.com/ycarowwww/javascript-simple-projects.git
     ```
 2. Navigate to the project folder:
     ```bash
