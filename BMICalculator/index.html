@@ -6,38 +6,46 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>BMI Calculator</title>
         <link rel="stylesheet" href="index.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     </head>
     <body>
-        <figure>
-            <img src="images/bmi.svg" alt="Undraw Exercice">
-        </figure>
-
         <main>
             <h1>BMI Calculator</h1>
 
-            <fieldset>
-                <div>
-                    <input type="number" name="height" id="heightinput" placeholder="Height" min="0">
-                    <span class="material-symbols-outlined">height</span>
-                </div>
-                
-                <div>
-                    <input type="number" name="weight" id="weightinput" placeholder="Weight" min="0">
-                    <span class="material-symbols-outlined">weight</span>
+            <h2>Height</h2>
+
+            <input type="number" name="height-input" id="height-input" placeholder="0.0" min="0" value="0">
+            <select name="height-select" id="height-select">
+                <option value="cm" selected>cm</option>
+                <option value="feet">feet</option>
+                <option value="inches">inches</option>
+                <option value="yard">yard</option>
+            </select>
+
+            <h2>Weight</h2>
+
+            <input type="number" name="weight-input" id="weight-input" placeholder="0.0" min="0" value="0">
+            <select name="weight-select" id="weight-select">
+                <option value="kg" selected>kg</option>
+                <option value="lbs">lbs</option>
+                <option value="oz">oz</option>
+            </select>
+
+            <button id="calculate-btn" aria-expanded="false" aria-controls="bmi-result-container">Calculate</button>
+
+            <div id="bmi-result-container">
+                <h2>Your Result</h2>
+
+                <div id="bmi-result-data">
+                    <p id="bmi-value"></p>
+                    <p id="bmi-classification"></p>
                 </div>
 
-                <button type="button" id="calculatebmibutton">Calculate</button>
-            </fieldset>
-
-            <div id="bmidiv">
-                <p id="bmivalue"></p>
-                <p id="bmiclassification"></p>
-                <a href="#" id="calculatebmiagain">Calculate Again</a>
-                <a href="https://en.wikipedia.org/wiki/Body_mass_index" target="_blank"><span>What is BMI?</span><span class="material-symbols-outlined">open_in_new</span></a>
+                <p id="error-text">Calculation Error</p>
             </div>
+
+            <a href="https://en.wikipedia.org/wiki/Body_mass_index" target="_blank" class="bmi-link">What is BMI?</a>
         </main>
-        
+
         <script src="index.js"></script>
     </body>
 </html>
