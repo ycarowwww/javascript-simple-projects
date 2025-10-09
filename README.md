@@ -18,8 +18,10 @@ A repository containing some Javascript projects I made while learning the langu
 
 - ![Static Badge](https://img.shields.io/badge/javascript-gray?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 - ![Static Badge](https://img.shields.io/badge/HTML5-%23E34F26?style=for-the-badge&logo=html5&logoColor=white)
-- ![Static Badge](https://img.shields.io/badge/CSS3-%231572B6?style=for-the-badge&logo=css3&logoColor=white)
+- ![Static Badge](https://img.shields.io/badge/CSS3-%231572B6?style=for-the-badge&logo=css&logoColor=white)
 - ![Static Badge](https://img.shields.io/badge/API-%2341454A?style=for-the-badge&logo=academia&logoColor=white)
+- ![Static Badge](https://img.shields.io/badge/Node.js-%235FA04E?style=for-the-badge&logo=nodedotjs&logoColor=white)
+- ![Static Badge](https://img.shields.io/badge/Socket.IO-%23010101?style=for-the-badge&logo=socketdotio&logoColor=white)
 
 ## Contributing
 

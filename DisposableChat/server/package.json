@@ -1,0 +1,24 @@
+{
+  "name": "socketio-disposable-chat",
+  "version": "1.0.0",
+  "description": "A Simple Disposable Chat made with Socket.io",
+  "homepage": "https://github.com/ycarowwww/javascript-simple-projects#readme",
+  "bugs": {
+    "url": "https://github.com/ycarowwww/javascript-simple-projects/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ycarowwww/javascript-simple-projects.git"
+  },
+  "license": "ISC",
+  "author": "ycarowwww",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "socket.io": "^4.8.1"
+  }
+}

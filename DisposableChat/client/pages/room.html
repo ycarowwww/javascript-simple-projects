@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Disposable Chat - Talk in the Chat</title>
+        <link rel="stylesheet" href="../styles/room.css">
+        <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
+        <script defer src="../js/room.js"></script>
+    </head>
+    <body>
+        <main>
+            <h1 id="main-h1">Disposable Chat</h1>
+
+            <section class="messages">
+                <h2>Messages</h2>
+
+                <ul id="messages-list">
+                </ul>
+            </section>
+
+            <section class="users">
+                <h2>Users</h2>
+                
+                <ul id="users-list">
+                </ul>
+            </section>
+
+            <section class="send-message">
+                <input type="text" name="message-input" id="message-input" placeholder="Message Text">
+
+                <button id="send-button">Send Message</button>
+            </section>
+        </main>
+
+        <template id="template-msg-user">
+            <li><span class="msg-user"></span>: <span class="msg-span"></span></li>
+        </template>
+
+        <template id="template-server-msg">
+            <li class="server-msg"></li>
+        </template>
+
+        <template id="template-user-list">
+            <li></li>
+        </template>
+    </body>
+</html> 
