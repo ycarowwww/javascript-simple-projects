@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Connect Four Game</title>
+        <link rel="stylesheet" href="index.css">
+        <script defer src="index.js"></script>
+    </head>
+    <body>
+        <main id="main">
+            <div class="settings">
+                <fieldset class="board-settings">
+                    <input type="number" name="amount-rows" id="amount-rows" min="0" max="100" value="6">
+                    <input type="number" name="amount-columns" id="amount-columns" min="0" max="100" value="7">
+                    <input type="number" name="linesize" id="linesize" min="0" max="100" value="4">
+                </fieldset>
+
+                <fieldset class="player-settings">
+                    <input type="color" name="player-1-color" id="player-1-color" value="#FF0000">
+                    <input type="color" name="player-2-color" id="player-2-color" value="#FFFF00">
+                </fieldset>
+
+                <button id="create-board">Create Board</button>
+                <button id="reset-board">Reset Board</button>
+            </div>
+            
+            <div id="game"></div>
+        </main>
+    </body>
+</html>

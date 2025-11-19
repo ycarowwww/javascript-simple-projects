@@ -1,0 +1,146 @@
+@charset "UTF-8";
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+:root {
+    --body-bg: #303030;
+    --main-bg: #ABCDEF;
+    --any-team-color: gray;
+    --btn-fg-1: #F0F0F0;
+    --btn-bg-1: #990000;
+    --btn-bg-1h: #AA0000;
+    --btn-bg-2: #000099;
+    --btn-bg-2h: #0000AA;
+    --btn-winner: #009900;
+    --shadow: rgba(0, 0, 0, .5);
+    
+    --team-1-color: #FF0000;
+    --team-2-color: #FFFF00;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    height: 100dvh;
+    background-color: var(--body-bg);
+}
+
+#main {
+    width: 30dvw;
+    padding: 1rem;
+    border-radius: .5rem;
+    background-color: var(--main-bg);
+    box-shadow: 0 0 3px var(--shadow);
+}
+
+#main .settings {
+    margin-bottom: 1rem;
+}
+
+#main fieldset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+
+#main fieldset input {
+    font-size: 1.2rem;
+    flex-basis: 1;
+    padding: .2rem;
+    border-radius: .2rem;
+    box-shadow: 0 0 2px var(--shadow);
+    width: 100%;
+}
+
+#main fieldset + fieldset {
+    margin-top: .4rem;
+}
+
+#main .settings button {
+    color: var(--btn-fg-1);
+    font-size: 1.2rem;
+    padding: .4rem;
+    border-radius: .4rem;
+    margin-top: .4rem;
+    box-shadow: 0 0 2px var(--shadow);
+    transition: background-color .3s ease;
+    cursor: pointer;
+}
+
+#main .player-settings input.current-team {
+    box-shadow: 0 0 3px 2px var(--btn-winner);
+}
+
+#create-board {
+    background-color: var(--btn-bg-1);
+}
+
+#create-board:hover {
+    background-color: var(--btn-bg-1h);
+}
+
+#reset-board {
+    background-color: var(--btn-bg-2);
+}
+
+#reset-board:hover {
+    background-color: var(--btn-bg-2h);
+}
+
+#main .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+
+#main .row + .row {
+    margin-top: .5rem;
+}
+
+#main .row button {
+    flex-basis: 1;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background-color: var(--any-team-color);
+    box-shadow: 0 0 3px var(--shadow) inset;
+    transition: box-shadow .5s ease;
+    cursor: pointer;
+}
+
+#main .row button:hover {
+    box-shadow: 0 0 6px var(--shadow) inset;
+}
+
+#main .row button.btn-team-1 {
+    background-color: var(--team-1-color);
+}
+
+#main .row button.btn-team-2 {
+    background-color: var(--team-2-color);
+}
+
+#main .row button.winner {
+    box-shadow: 0 0 3px var(--shadow) inset, 
+                0 0 3px 2px var(--btn-winner);
+}
+
+#main .row button.winner:hover {
+    box-shadow: 0 0 6px var(--shadow) inset,
+                0 0 3px 3px var(--btn-winner);
+}
+
+@media (max-width: 940px) {
+    #main { /* Really basic Responsiveness */
+        width: 65dvw;
+    }
+}
